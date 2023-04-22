@@ -1,0 +1,38 @@
+Rack := {1}.
+Frame := {2, 3, 4}.
+Module := {5, 6, 7, 8, 9}.
+Element := {10, 11, 12, 13}.
+UNUSED := {}.
+module14 := {6, 7, 8, 9}.
+typeOfR := {1 -> RackSingle}.
+typeOfM := {5 -> ModuleV, 6 -> ModuleIII, 7 -> ModuleII, 8 -> ModuleI, 9 -> ModuleIV}.
+typeOfE := {10 -> ElementB, 11 -> ElementC, 12 -> ElementD, 13 -> ElementA}.
+rackOfF := {2 -> 1, 3 -> 1, 4 -> 1}.
+frameOfM := {5 -> 2, 6 -> 4, 7 -> 2, 8 -> 3, 9 -> 2}.
+elementOfM := {6 -> 11, 7 -> 10, 8 -> 13, 9 -> 12}.
+maxRack := 2.
+maxFrame := 5.
+maxModule := 10.
+maxElement := 14.
+// maxUNUSED := *.
+mulConfigObject := {1 -> 5, 2 -> 10, 3 -> 5, 4 -> 5, 5 -> 10, 6 -> 15, 7 -> 10, 8 -> 5, 9 -> 20, 10 -> 5, 11 -> 5, 12 -> 5, 13 -> 5}.
+typeConfigObject := {1 -> Rack__, 2 -> Frame__, 3 -> Frame__, 4 -> Frame__, 5 -> Module__, 6 -> Module__, 7 -> Module__, 8 -> Module__, 9 -> Module__, 10 -> Element__, 11 -> Element__, 12 -> Element__, 13 -> Element__}.
+
+6.987 Expansion
+-------------------
+ConfigObject := {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105}.
+Rack := {1, 2, 3, 4, 5}.
+Frame := {6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25}.
+Module := {26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85}.
+Element := {86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105}.
+UNUSED := {}.
+module14 := {36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85}.
+typeOfR := {1 -> RackSingle, 2 -> RackSingle, 3 -> RackSingle, 4 -> RackSingle, 5 -> RackSingle}.
+typeOfM := {26 -> ModuleV, 27 -> ModuleV, 28 -> ModuleV, 29 -> ModuleV, 30 -> ModuleV, 31 -> ModuleV, 32 -> ModuleV, 33 -> ModuleV, 34 -> ModuleV, 35 -> ModuleV, 36 -> ModuleIII, 37 -> ModuleIII, 38 -> ModuleIII, 39 -> ModuleIII, 40 -> ModuleIII, 41 -> ModuleIII, 42 -> ModuleIII, 43 -> ModuleIII, 44 -> ModuleIII, 45 -> ModuleIII, 46 -> ModuleIII, 47 -> ModuleIII, 48 -> ModuleIII, 49 -> ModuleIII, 50 -> ModuleIII, 51 -> ModuleII, 52 -> ModuleII, 53 -> ModuleII, 54 -> ModuleII, 55 -> ModuleII, 56 -> ModuleII, 57 -> ModuleII, 58 -> ModuleII, 59 -> ModuleII, 60 -> ModuleII, 61 -> ModuleI, 62 -> ModuleI, 63 -> ModuleI, 64 -> ModuleI, 65 -> ModuleI, 66 -> ModuleIV, 67 -> ModuleIV, 68 -> ModuleIV, 69 -> ModuleIV, 70 -> ModuleIV, 71 -> ModuleIV, 72 -> ModuleIV, 73 -> ModuleIV, 74 -> ModuleIV, 75 -> ModuleIV, 76 -> ModuleIV, 77 -> ModuleIV, 78 -> ModuleIV, 79 -> ModuleIV, 80 -> ModuleIV, 81 -> ModuleIV, 82 -> ModuleIV, 83 -> ModuleIV, 84 -> ModuleIV, 85 -> ModuleIV}.
+typeOfE := {86 -> ElementB, 87 -> ElementB, 88 -> ElementB, 89 -> ElementB, 90 -> ElementB, 91 -> ElementC, 92 -> ElementC, 93 -> ElementC, 94 -> ElementC, 95 -> ElementC, 96 -> ElementD, 97 -> ElementD, 98 -> ElementD, 99 -> ElementD, 100 -> ElementD, 101 -> ElementA, 102 -> ElementA, 103 -> ElementA, 104 -> ElementA, 105 -> ElementA}.
+rackOfF := {6 -> 1, 7 -> 2, 8 -> 3, 9 -> 4, 10 -> 5, 11 -> 1, 12 -> 2, 13 -> 3, 14 -> 4, 15 -> 5, 16 -> 1, 17 -> 2, 18 -> 3, 19 -> 4, 20 -> 5, 21 -> 1, 22 -> 2, 23 -> 3, 24 -> 4, 25 -> 5}.
+frameOfM := {26 -> 6, 27 -> 7, 28 -> 8, 29 -> 9, 30 -> 10, 31 -> 11, 32 -> 12, 33 -> 13, 34 -> 14, 35 -> 15, 36 -> 21, 37 -> 22, 38 -> 23, 39 -> 24, 40 -> 25, 41 -> 21, 42 -> 22, 43 -> 23, 44 -> 24, 45 -> 25, 46 -> 21, 47 -> 22, 48 -> 23, 49 -> 24, 50 -> 25, 51 -> 6, 52 -> 7, 53 -> 8, 54 -> 9, 55 -> 10, 56 -> 11, 57 -> 12, 58 -> 13, 59 -> 14, 60 -> 15, 61 -> 16, 62 -> 17, 63 -> 18, 64 -> 19, 65 -> 20, 66 -> 6, 67 -> 7, 68 -> 8, 69 -> 9, 70 -> 10, 71 -> 11, 72 -> 12, 73 -> 13, 74 -> 14, 75 -> 15, 76 -> 6, 77 -> 7, 78 -> 8, 79 -> 9, 80 -> 10, 81 -> 11, 82 -> 12, 83 -> 13, 84 -> 14, 85 -> 15}.
+elementOfM := {36 -> 91, 37 -> 92, 38 -> 93, 39 -> 94, 40 -> 95, 41 -> 91, 42 -> 92, 43 -> 93, 44 -> 94, 45 -> 95, 46 -> 91, 47 -> 92, 48 -> 93, 49 -> 94, 50 -> 95, 51 -> 86, 52 -> 87, 53 -> 88, 54 -> 89, 55 -> 90, 56 -> 86, 57 -> 87, 58 -> 88, 59 -> 89, 60 -> 90, 61 -> 101, 62 -> 102, 63 -> 103, 64 -> 104, 65 -> 105, 66 -> 96, 67 -> 97, 68 -> 98, 69 -> 99, 70 -> 100, 71 -> 96, 72 -> 97, 73 -> 98, 74 -> 99, 75 -> 100, 76 -> 96, 77 -> 97, 78 -> 98, 79 -> 99, 80 -> 100, 81 -> 96, 82 -> 97, 83 -> 98, 84 -> 99, 85 -> 100}.
+typeConfigObject := {1 -> Rack__, 2 -> Rack__, 3 -> Rack__, 4 -> Rack__, 5 -> Rack__, 6 -> Frame__, 7 -> Frame__, 8 -> Frame__, 9 -> Frame__, 10 -> Frame__, 11 -> Frame__, 12 -> Frame__, 13 -> Frame__, 14 -> Frame__, 15 -> Frame__, 16 -> Frame__, 17 -> Frame__, 18 -> Frame__, 19 -> Frame__, 20 -> Frame__, 21 -> Frame__, 22 -> Frame__, 23 -> Frame__, 24 -> Frame__, 25 -> Frame__, 26 -> Module__, 27 -> Module__, 28 -> Module__, 29 -> Module__, 30 -> Module__, 31 -> Module__, 32 -> Module__, 33 -> Module__, 34 -> Module__, 35 -> Module__, 36 -> Module__, 37 -> Module__, 38 -> Module__, 39 -> Module__, 40 -> Module__, 41 -> Module__, 42 -> Module__, 43 -> Module__, 44 -> Module__, 45 -> Module__, 46 -> Module__, 47 -> Module__, 48 -> Module__, 49 -> Module__, 50 -> Module__, 51 -> Module__, 52 -> Module__, 53 -> Module__, 54 -> Module__, 55 -> Module__, 56 -> Module__, 57 -> Module__, 58 -> Module__, 59 -> Module__, 60 -> Module__, 61 -> Module__, 62 -> Module__, 63 -> Module__, 64 -> Module__, 65 -> Module__, 66 -> Module__, 67 -> Module__, 68 -> Module__, 69 -> Module__, 70 -> Module__, 71 -> Module__, 72 -> Module__, 73 -> Module__, 74 -> Module__, 75 -> Module__, 76 -> Module__, 77 -> Module__, 78 -> Module__, 79 -> Module__, 80 -> Module__, 81 -> Module__, 82 -> Module__, 83 -> Module__, 84 -> Module__, 85 -> Module__, 86 -> Element__, 87 -> Element__, 88 -> Element__, 89 -> Element__, 90 -> Element__, 91 -> Element__, 92 -> Element__, 93 -> Element__, 94 -> Element__, 95 -> Element__, 96 -> Element__, 97 -> Element__, 98 -> Element__, 99 -> Element__, 100 -> Element__, 101 -> Element__, 102 -> Element__, 103 -> Element__, 104 -> Element__, 105 -> Element__}.
+-------------------
+Elapsed time: 7.109445810317993 seconds

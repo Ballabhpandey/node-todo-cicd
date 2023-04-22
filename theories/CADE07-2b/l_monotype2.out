@@ -1,0 +1,21 @@
+El := {1}.
+UNUSED := {}.
+List_content := {1}.
+list_size := 1.
+c := 1.
+maxEl := 2.
+// maxUNUSED := *.
+mulConfigObject := {1 -> 1}.
+typeConfigObject := {1 -> El__}.
+
+0.042 Expansion
+-------------------
+ConfigObject := {1}.
+El := {1}.
+UNUSED := {}.
+List_content := {1}.
+list_size := {-> 1}.
+c := {-> 1}.
+typeConfigObject := {1 -> El__}.
+-------------------
+Elapsed time: 0.07966947555541992 seconds

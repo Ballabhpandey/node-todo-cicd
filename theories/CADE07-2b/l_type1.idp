@@ -1,0 +1,29 @@
+vocabulary V { 
+    type El_T 
+    El: (El_T) → 𝔹
+    List_content: (El) → 𝔹
+    list_size: () → ℤ
+    c: () → El
+    var e ∈ El
+    mulEl_T: (El_T) → ℤ
+}
+theory T:V { 
+    [¬((list_size() = #{e : List_content(e)} ⇒ (list_size() + 1 = #{e : List_content(e) ∨ e = c()})))]
+      ¬((list_size() = sum(lambda e ∈ El : if List_content(e) then mulEl_T(e) else 0) ⇒ (list_size() + 1 = sum(lambda e ∈ El : if List_content(e) ∨ e = c() then mulEl_T(e) else 0)))).
+    ∀ mulEl_T0_ ∈ El_T: 0 ≤ mulEl_T(mulEl_T0_).
+    mulEl_T(c()) = 1.
+    
+    ! x in El_T: El(x) <=> 0 < mulEl_T(x).
+    
+}
+
+procedure main() {
+    logging.getLogger().setLevel(logging.INFO)
+    interp, sol = Theory(T).generate(timeout_seconds=0)
+    pretty_print(sol)
+    print(duration("Expansion"))
+    print("-------------------")
+    print(Theory(T).expand_lifting(sol))
+    print("-------------------")
+}
+        

@@ -1,0 +1,37 @@
+vocabulary V {
+    type Section
+    type Element
+    type Module
+    type slot
+    type Rack
+
+    SofE: Element → Section
+    EofM: Module → Element
+    s_has_Module: slot → 𝔹
+    Mofs: slot → Module
+    Rofs: slot → Rack
+    SofR: Rack → Section
+
+    var S ∈ Section
+    var E ∈ Element
+    var M ∈ Module
+    var s ∈ slot
+    var R ∈ Rack
+}
+
+theory T:V {
+    1 ≤ #{S: true}.
+
+    3 ≤ #{E: true}.
+    ∀S: 1 ≤ #{E: SofE(E) = S} ≤ 20.
+
+    ∀E: 1 ≤ #{M: EofM(M) = E} ≤ 8.
+
+    ∀M: #{s: Mofs(s) = M} = 2.
+
+    ∀R: #{s: Rofs(s) = R} = 5.
+
+    ∀S: 1≤ #{R: SofR(R) = S} ≤ 2.
+}
+
+structure S:V {}

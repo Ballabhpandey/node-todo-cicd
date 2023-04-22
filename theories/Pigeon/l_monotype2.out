@@ -1,0 +1,9 @@
+Pigeon := {1}.
+Hole := {2}.
+UNUSED := {}.
+holeOf := {1 -> 2}.
+maxPigeon := 2.
+maxHole := 3.
+// maxUNUSED := *.
+mulConfigObject := {1 -> 20, 2 -> 20}.
+typeConfigObject := {1 -> Pigeon__, 2 -> Hole__}.

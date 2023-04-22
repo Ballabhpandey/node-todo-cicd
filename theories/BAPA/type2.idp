@@ -1,0 +1,27 @@
+vocabulary V { 
+    type El_T 
+    El: (El_T) → 𝔹
+    A: (El) → 𝔹
+    B: (El) → 𝔹
+    C: (El) → 𝔹
+    var e ∈ El
+}
+theory T:V { 
+    #{e : A(e)} > 1.
+    ∀ e: A(e) ⇒ B(e).
+    #{e : B(e) ∧ C(e)} ≤ 2.
+    
+    
+    
+}
+
+procedure main() {
+    logging.getLogger().setLevel(logging.INFO)
+    interp, sol = Theory(T).generate(factor=1.5, timeout_seconds=0)
+    pretty_print(sol)
+    print(duration("Expansion"))
+    print("-------------------")
+    print(Theory(T).expand_lifting(sol))
+    print("-------------------")
+}
+        

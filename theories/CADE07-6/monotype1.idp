@@ -1,0 +1,36 @@
+vocabulary V { 
+    type ConfigObject 
+    El: (ConfigObject) → 𝔹
+    C: (El) → 𝔹
+    C1: (El) → 𝔹
+    alloc0: (El) → 𝔹
+    alloc1: (El) → 𝔹
+    alloc2: (El) → 𝔹
+    c: () → El
+    var e ∈ El
+    maxEl: () → ℤ
+    type TypeConfigObject := {El__}
+    typeConfigObject : ConfigObject -> TypeConfigObject
+}
+theory T:V { 
+    ¬((C(c()) ∧ (∀ e: C1(e) ⇔ C(e) ∧ e ≠ c()) ∧ #{e : alloc1(e) ∧ ¬(alloc0(e))} ≤ 1 ∧ #{e : alloc2(e) ∧ ¬(alloc1(e))} ≤ #{e : C1(e)} ⇒ #{e : alloc2(e) ∧ ¬(alloc0(e))} ≤ #{e : C(e)})).
+    
+    { !x in ConfigObject: typeConfigObject(x)=El__ <- El(x).
+    }
+    {
+      !x in ConfigObject: typeConfigObject(x)=El__ <- 1 =< x < maxEl().
+    }
+
+    
+}
+
+procedure main() {
+    logging.getLogger().setLevel(logging.INFO)
+    interp, sol = Theory(T).generate(timeout_seconds=0)
+    pretty_print(sol)
+    print(duration("Expansion"))
+    print("-------------------")
+    print(Theory(T).expand_lifting(sol))
+    print("-------------------")
+}
+        

@@ -1,0 +1,30 @@
+vocabulary V {
+    type Monkey
+    type Banana
+    type Tree
+
+    ownerOfB: Banana -> Monkey
+    treeOfM: Monkey -> Tree
+    partnerOfM: Monkey -> Monkey
+
+    var m in Monkey
+    var b in Banana
+    var t in Tree
+}
+
+theory T:V {
+    [Each monkey owns at least 2 bananas]
+    ! m: 2 =< #{b: ownerOfB(b)=m}.
+
+    [Each tree contains 3 monkeys]
+    ! t: #{m: treeOfM(m)=t} = 3.
+
+    [Partners form pairs]
+    ! m: partnerOfM(m) ~= m & partnerOfM(partnerOfM(m)) = m.
+
+    [There 4 trees]
+    #{t: true} = 4.
+}
+
+theory S:V {
+}

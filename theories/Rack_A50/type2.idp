@@ -1,0 +1,50 @@
+vocabulary V { 
+    type Rack_T 
+    Rack: (Rack_T) → 𝔹
+    type Frame_T 
+    Frame: (Frame_T) → 𝔹
+    type Module_T 
+    Module: (Module_T) → 𝔹
+    type Element_T 
+    Element: (Element_T) → 𝔹
+    type RackType := {RackSingle, RackDouble}
+    type ModuleType := {ModuleI, ModuleII, ModuleIII, ModuleIV, ModuleV}
+    type ElementType := {ElementA, ElementB, ElementC, ElementD}
+    module14: (Module) → 𝔹
+    typeOfR: (Rack) → RackType
+    typeOfM: (Module) → ModuleType
+    typeOfE: (Element) → ElementType
+    rackOfF: (Frame) → Rack
+    frameOfM: (Module) → Frame
+    elementOfM: (module14) → Element
+}
+theory T:V { 
+    ∀ r ∈ Rack: typeOfR(r) = RackSingle ⇒ #{f ∈ Frame : rackOfF(f) = r} = 4.
+    ∀ r ∈ Rack: typeOfR(r) = RackDouble ⇒ #{f ∈ Frame : rackOfF(f) = r} = 8.
+    ∀ f ∈ Frame: #{m ∈ Module : frameOfM(m) = f} ≤ 5.
+    ∀ f ∈ Frame: (∃ m2 ∈ Module: frameOfM(m2) = f ∧ typeOfM(m2) = ModuleII) ⇔ #{m5 ∈ Module : frameOfM(m5) = f ∧ typeOfM(m5) = ModuleV} = 1.
+    ∀ f ∈ Frame: ¬((∃ m2 ∈ Module: frameOfM(m2) = f ∧ typeOfM(m2) = ModuleII)) ⇒ #{m5 ∈ Module : frameOfM(m5) = f ∧ typeOfM(m5) = ModuleV} = 0.
+    ∀ e ∈ Element: typeOfE(e) = ElementA ⇒ #{m ∈ Module : elementOfM(m) = e ∧ typeOfM(m) = ModuleI} = 1.
+    ∀ e ∈ Element: typeOfE(e) = ElementB ⇒ #{m ∈ Module : elementOfM(m) = e ∧ typeOfM(m) = ModuleII} = 2.
+    ∀ e ∈ Element: typeOfE(e) = ElementC ⇒ #{m ∈ Module : elementOfM(m) = e ∧ typeOfM(m) = ModuleIII} = 3.
+    ∀ e ∈ Element: typeOfE(e) = ElementD ⇒ #{m ∈ Module : elementOfM(m) = e ∧ typeOfM(m) = ModuleIV} = 4.
+    #{e ∈ Element : typeOfE(e) = ElementA} = 50.
+    #{e ∈ Element : typeOfE(e) = ElementB} = 0.
+    #{e ∈ Element : typeOfE(e) = ElementC} = 0.
+    #{e ∈ Element : typeOfE(e) = ElementD} = 0.
+    { ∀ module140_ ∈ Module: module14(module140_) ← ¬(typeOfM(module140_) = ModuleV).
+    }
+    
+    
+}
+
+procedure main() {
+    logging.getLogger().setLevel(logging.INFO)
+    interp, sol = Theory(T).generate(factor=1.5, timeout_seconds=0, unsat_seconds=5)
+    pretty_print(sol)
+    print(duration("Expansion"))
+    print("-------------------")
+    print(Theory(T).expand_lifting(sol))
+    print("-------------------")
+}
+        

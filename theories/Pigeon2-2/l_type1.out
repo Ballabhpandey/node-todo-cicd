@@ -1,0 +1,5 @@
+Pigeon := {P1, P2, P3, P4}.
+Hole := {H1, H2}.
+inHole := {(P1, H1), (P2, H1), (P3, H2), (P4, H2)}.
+mulPigeon_T := {P1 -> 1, P2 -> 1, P3 -> 1, P4 -> 1}.
+mulHole_T := {H1 -> 2, H2 -> 2, H3 -> 0}.

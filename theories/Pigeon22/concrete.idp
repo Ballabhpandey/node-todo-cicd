@@ -1,0 +1,24 @@
+vocabulary V {
+    type Pigeon
+    type Hole
+    type Relation
+
+    pigeonOfR: Relation -> Pigeon
+    holeOfR: Relation -> Hole
+
+    var p in Pigeon
+    var h in Hole
+    var r in Relation
+}
+
+theory T:V {
+    #{p: true}=$n$.
+    !p: #{r: pigeonOfR(r)=p}=2.
+    !h: #{r: holeOfR(r)=h}=2.
+
+    !h,p: #{r: pigeonOfR(r)=p & holeOfR(r)=h} =< 1.
+}
+
+structure S:V {
+
+}

@@ -1,0 +1,53 @@
+vocabulary V {
+	type Rack
+	type Frame
+	type Module
+	type Element
+
+	type RackType ≜ { RackSingle, RackDouble }
+	type ModuleType ≜ { ModuleI, ModuleII, ModuleIII, ModuleIV, ModuleV }
+	type ElementType ≜ { ElementA, ElementB, ElementC, ElementD }
+
+    module14: Module → 𝔹
+
+    typeOfR: Rack → RackType
+    typeOfM: Module → ModuleType
+    typeOfE: Element → ElementType
+
+    rackOfF: Frame → Rack
+    frameOfM: Module → Frame
+    elementOfM: module14 → Element
+}
+
+theory T:V {
+    { ∀ m ∈ Module: module14(m) ← typeOfM(m) ≠ ModuleV.}
+
+    // A single rack has 4 or 8 frames
+    ∀ r ∈ Rack: typeOfR(r) = RackSingle ⇒ #{f ∈ Frame: rackOfF(f)=r} = 4.
+    ∀ r ∈ Rack: typeOfR(r) = RackDouble ⇒ #{f ∈ Frame: rackOfF(f)=r} = 8.
+
+    // A frame can have up to 5 modules
+    ∀ f ∈ Frame: #{m ∈ Module: frameOfM(m)=f} ≤ 5.
+
+    // A Frame containing a ModuleII must have also exactly one ModuleV
+    ∀ f ∈ Frame: (∃ m2 ∈ Module: frameOfM(m2)=f ∧ typeOfM(m2)=ModuleII)
+                ⇔ #{ m5 ∈ Module: frameOfM(m5)=f ∧ typeOfM(m5)=ModuleV} = 1.
+
+    // A Frame containing a ModuleV must have at least a ModuleII
+    ∀ f ∈ Frame: ¬(∃ m2 ∈ Module: frameOfM(m2)=f ∧ typeOfM(m2)=ModuleII)
+                ⇒ #{ m5 ∈ Module: frameOfM(m5)=f ∧ typeOfM(m5)=ModuleV} = 0.
+
+    // #modules required per element
+    ∀ e ∈ Element: typeOfE(e)=ElementA ⇒ #{m ∈ Module: elementOfM(m)=e & typeOfM(m)=ModuleI} = 1.
+    ∀ e ∈ Element: typeOfE(e)=ElementB ⇒ #{m ∈ Module: elementOfM(m)=e & typeOfM(m)=ModuleII} = 2.
+    ∀ e ∈ Element: typeOfE(e)=ElementC ⇒ #{m ∈ Module: elementOfM(m)=e & typeOfM(m)=ModuleIII} = 3.
+    ∀ e ∈ Element: typeOfE(e)=ElementD ⇒ #{m ∈ Module: elementOfM(m)=e & typeOfM(m)=ModuleIV} = 4.
+
+}
+
+theory S:V {
+    #{e in Element: typeOfE(e) = ElementA} = 50.
+    #{e in Element: typeOfE(e) = ElementB} = 0.
+    #{e in Element: typeOfE(e) = ElementC} = 0.
+    #{e in Element: typeOfE(e) = ElementD} = 0.
+}

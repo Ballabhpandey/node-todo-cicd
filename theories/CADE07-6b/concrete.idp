@@ -1,0 +1,28 @@
+vocabulary V {
+    type El
+    l1, this : El → 𝔹
+    Object_alloc, Object_alloc_16, Object_alloc_30, Object_alloc_45, Object_alloc74, Object_alloc_60: El -> Bool
+    List_content, List_content_73: El -> Bool
+    S1_42, S2_41: El -> Bool
+    tmp_3_57: () -> El
+    var e in El
+}
+
+theory T:V {
+    ~( (?e: l1(e)) & (?e: this(e)) & (?e: ~(l1(e) <=> this(e)))
+       & Object_alloc(tmp_3_57())
+       & (!e: Object_alloc_45(e) <=> Object_alloc_60(e))
+       & (!e: Object_alloc_45(e) <=> Object_alloc(e))
+       & S1_42(tmp_3_57())
+       & (!e: S2_41(e) <=> S1_42(e) & e ~= tmp_3_57())
+       & #{e: Object_alloc_30(e) & ~Object_alloc_45(e)} =< 1
+       & (!e: Object_alloc_45(e) => Object_alloc_30(e))
+       & #{e: Object_alloc_30(e) & ~Object_alloc(e)} =< 1
+       & (!e: Object_alloc_30(e) => Object_alloc_16(e))
+       & #{e: Object_alloc_16(e) & ~Object_alloc_30(e)} =< #{e: S2_41(e)}
+       => #{e: Object_alloc_16(e) & ~Object_alloc(e)} < #{e: S1_42(e)}
+    ).
+}
+
+structure S:V {
+}

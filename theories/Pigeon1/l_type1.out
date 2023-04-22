@@ -1,0 +1,15 @@
+Pigeon := {P1}.
+Hole := {H1}.
+holeOf := {P1 -> H1}.
+mulPigeon_T := {P1 -> 1}.
+mulHole_T := {H1 -> 1}.
+
+0.029 Expansion
+-------------------
+Pigeon_T := {1}.
+Hole_T := {2}.
+Pigeon := {1}.
+Hole := {2}.
+holeOf := {1 -> 2}.
+-------------------
+Elapsed time: 0.058148860931396484 seconds

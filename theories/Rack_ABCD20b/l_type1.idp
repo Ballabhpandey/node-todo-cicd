@@ -1,0 +1,81 @@
+vocabulary V { 
+    type Rack_T 
+    Rack: (Rack_T) → 𝔹
+    type Frame_T 
+    Frame: (Frame_T) → 𝔹
+    type Module_T 
+    Module: (Module_T) → 𝔹
+    type Element_T 
+    Element: (Element_T) → 𝔹
+    type RackType := {RackSingle, RackDouble}
+    type ModuleType := {ModuleI, ModuleII, ModuleIII, ModuleIV, ModuleV}
+    type ElementType := {ElementA, ElementB, ElementC, ElementD}
+    module14: (Module) → 𝔹
+    typeOfR: (Rack) → RackType
+    typeOfM: (Module) → ModuleType
+    typeOfE: (Element) → ElementType
+    rackOfF: (Frame) → Rack
+    frameOfM: (Module) → Frame
+    elementOfM: (module14) → Element
+    frameOfE: (Element) → Frame
+    mulRack_T: (Rack_T) → ℤ
+    mulFrame_T: (Frame_T) → ℤ
+    mulModule_T: (Module_T) → ℤ
+    mulElement_T: (Element_T) → ℤ
+}
+theory T:V { 
+    [∀ r ∈ Rack: typeOfR(r) = RackSingle ⇒ #{f ∈ Frame : rackOfF(f) = r} = 4]
+      ∀ r ∈ Rack: typeOfR(r) = RackSingle ⇒ sum(lambda f ∈ Frame : if rackOfF(f) = r then mulFrame_T(f) else 0) = 4 ⨯ mulRack_T(r).
+    [∀ r ∈ Rack: typeOfR(r) = RackDouble ⇒ #{f ∈ Frame : rackOfF(f) = r} = 8]
+      ∀ r ∈ Rack: typeOfR(r) = RackDouble ⇒ sum(lambda f ∈ Frame : if rackOfF(f) = r then mulFrame_T(f) else 0) = 8 ⨯ mulRack_T(r).
+    [∀ f ∈ Frame: #{m ∈ Module : frameOfM(m) = f} ≤ 5]
+      ∀ f ∈ Frame: sum(lambda m ∈ Module : if frameOfM(m) = f then mulModule_T(m) else 0) ≤ 5 ⨯ mulFrame_T(f).
+    [∀ f ∈ Frame: (∃ m2 ∈ Module: frameOfM(m2) = f ∧ typeOfM(m2) = ModuleII) ⇔ #{m5 ∈ Module : frameOfM(m5) = f ∧ typeOfM(m5) = ModuleV} = 1]
+      ∀ f ∈ Frame: (∃ m2 ∈ Module: frameOfM(m2) = f ∧ typeOfM(m2) = ModuleII) ⇔ sum(lambda m5 ∈ Module : if frameOfM(m5) = f ∧ typeOfM(m5) = ModuleV then mulModule_T(m5) else 0) = 1 ⨯ mulFrame_T(f).
+    [∀ f ∈ Frame: (∃ m2 ∈ Module: frameOfM(m2) = f ∧ typeOfM(m2) = ModuleV) ⇒ (∃ m2 ∈ Module: frameOfM(m2) = f ∧ typeOfM(m2) = ModuleII)]
+      ∀ f ∈ Frame: (∃ m2 ∈ Module: frameOfM(m2) = f ∧ typeOfM(m2) = ModuleV) ⇒ (∃ m2 ∈ Module: frameOfM(m2) = f ∧ typeOfM(m2) = ModuleII).
+    [∀ e ∈ Element: typeOfE(e) = ElementA ⇒ #{m ∈ Module : elementOfM(m) = e ∧ typeOfM(m) = ModuleI} = 1]
+      ∀ e ∈ Element: typeOfE(e) = ElementA ⇒ sum(lambda m ∈ Module : if elementOfM(m) = e ∧ typeOfM(m) = ModuleI then mulModule_T(m) else 0) = 1 ⨯ mulElement_T(e).
+    [∀ e ∈ Element: typeOfE(e) = ElementB ⇒ #{m ∈ Module : elementOfM(m) = e ∧ typeOfM(m) = ModuleII} = 2]
+      ∀ e ∈ Element: typeOfE(e) = ElementB ⇒ sum(lambda m ∈ Module : if elementOfM(m) = e ∧ typeOfM(m) = ModuleII then mulModule_T(m) else 0) = 2 ⨯ mulElement_T(e).
+    [∀ e ∈ Element: typeOfE(e) = ElementC ⇒ #{m ∈ Module : elementOfM(m) = e ∧ typeOfM(m) = ModuleIII} = 3]
+      ∀ e ∈ Element: typeOfE(e) = ElementC ⇒ sum(lambda m ∈ Module : if elementOfM(m) = e ∧ typeOfM(m) = ModuleIII then mulModule_T(m) else 0) = 3 ⨯ mulElement_T(e).
+    [∀ e ∈ Element: typeOfE(e) = ElementD ⇒ #{m ∈ Module : elementOfM(m) = e ∧ typeOfM(m) = ModuleIV} = 4]
+      ∀ e ∈ Element: typeOfE(e) = ElementD ⇒ sum(lambda m ∈ Module : if elementOfM(m) = e ∧ typeOfM(m) = ModuleIV then mulModule_T(m) else 0) = 4 ⨯ mulElement_T(e).
+    [∀ m ∈ module14: frameOfM(m) = frameOfE(elementOfM(m))]
+      ∀ m ∈ module14: frameOfM(m) = frameOfE(elementOfM(m)).
+    [#{e ∈ Element : typeOfE(e) = ElementA} = 5]
+      sum(lambda e ∈ Element : if typeOfE(e) = ElementA then mulElement_T(e) else 0) = 5.
+    [#{e ∈ Element : typeOfE(e) = ElementB} = 5]
+      sum(lambda e ∈ Element : if typeOfE(e) = ElementB then mulElement_T(e) else 0) = 5.
+    [#{e ∈ Element : typeOfE(e) = ElementC} = 5]
+      sum(lambda e ∈ Element : if typeOfE(e) = ElementC then mulElement_T(e) else 0) = 5.
+    [#{e ∈ Element : typeOfE(e) = ElementD} = 5]
+      sum(lambda e ∈ Element : if typeOfE(e) = ElementD then mulElement_T(e) else 0) = 5.
+    ∀ mulRack_T0_ ∈ Rack_T: 0 ≤ mulRack_T(mulRack_T0_).
+    ∀ mulFrame_T0_ ∈ Frame_T: 0 ≤ mulFrame_T(mulFrame_T0_).
+    ∀ mulModule_T0_ ∈ Module_T: 0 ≤ mulModule_T(mulModule_T0_).
+    ∀ mulElement_T0_ ∈ Element_T: 0 ≤ mulElement_T(mulElement_T0_).
+    ∀ f ∈ Frame: ∃ n__5sldkqsdf ∈ ℤ: mulFrame_T(f) = n__5sldkqsdf ⨯ mulRack_T(rackOfF(f)).
+    ∀ m ∈ Module: ∃ n__5sldkqsdf ∈ ℤ: mulModule_T(m) = n__5sldkqsdf ⨯ mulFrame_T(frameOfM(m)).
+    ∀ m ∈ Module: ∃ n__5sldkqsdf ∈ ℤ: mulModule_T(m) = n__5sldkqsdf ⨯ mulElement_T(elementOfM(m)).
+    ∀ frameOfE0_ ∈ Element: ∃ n__5sldkqsdf ∈ ℤ: mulElement_T(frameOfE0_) = n__5sldkqsdf ⨯ mulFrame_T(frameOfE(frameOfE0_)).
+    { ∀ module140_ ∈ Module: module14(module140_) ← ¬(typeOfM(module140_) = ModuleV).
+    }
+    ! x in Rack_T: Rack(x) <=> 0 < mulRack_T(x).
+    ! x in Frame_T: Frame(x) <=> 0 < mulFrame_T(x).
+    ! x in Module_T: Module(x) <=> 0 < mulModule_T(x).
+    ! x in Element_T: Element(x) <=> 0 < mulElement_T(x).
+    
+}
+
+procedure main() {
+    logging.getLogger().setLevel(logging.INFO)
+    interp, sol = Theory(T).generate(timeout_seconds=0, unsat_seconds=5)
+    pretty_print(sol)
+    print(duration("Expansion"))
+    print("-------------------")
+    print(Theory(T).expand_lifting(sol))
+    print("-------------------")
+}
+        

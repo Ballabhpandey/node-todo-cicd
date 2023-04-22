@@ -1,0 +1,28 @@
+vocabulary V { 
+    type Pigeon_T 
+    Pigeon: (Pigeon_T) → 𝔹
+    type Hole_T 
+    Hole: (Hole_T) → 𝔹
+    inHole: (Pigeon⨯Hole) → 𝔹
+    var p ∈ Pigeon
+    var h ∈ Hole
+}
+theory T:V { 
+    #{p : true} = 4.
+    ∀ h: #{p : inHole(p, h)} = 2.
+    ∀ p: #{h : inHole(p, h)} = 2.
+    
+    
+    
+}
+
+procedure main() {
+    logging.getLogger().setLevel(logging.INFO)
+    interp, sol = Theory(T).generate(timeout_seconds=0)
+    pretty_print(sol)
+    print(duration("Expansion"))
+    print("-------------------")
+    print(Theory(T).expand_lifting(sol))
+    print("-------------------")
+}
+        

@@ -1,0 +1,31 @@
+El := {1, 2}.
+l1 := {1, 2}.
+this := {2}.
+Object_alloc := {2}.
+Object_alloc_16 := {1, 2}.
+Object_alloc_30 := {1, 2}.
+Object_alloc_45 := {2}.
+Object_alloc_60 := {2}.
+S1_42 := {2}.
+S2_41 := {}.
+tmp_3_57 := 2.
+maxEl := 3.
+typeConfigObject := {1 -> El__, 2 -> El__}.
+
+0.088 Expansion
+-------------------
+ConfigObject := {}.
+El := {1, 2}.
+l1 := {1, 2}.
+this := {2}.
+Object_alloc := {2}.
+Object_alloc_16 := {1, 2}.
+Object_alloc_30 := {1, 2}.
+Object_alloc_45 := {2}.
+Object_alloc_60 := {2}.
+S1_42 := {2}.
+S2_41 := {}.
+tmp_3_57 := {-> 2}.
+typeConfigObject := {1 -> El__, 2 -> El__}.
+-------------------
+Elapsed time: 0.14880704879760742 seconds

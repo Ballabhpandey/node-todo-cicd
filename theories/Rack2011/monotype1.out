@@ -1,0 +1,33 @@
+Section := {1}.
+Element := {2, 3, 4}.
+Module := {5, 6, 7, 8, 9}.
+slot := {10, 11, 12, 13, 14, 15, 16, 17, 18, 19}.
+Rack := {20, 21}.
+SofE := {2 -> 1, 3 -> 1, 4 -> 1}.
+EofM := {5 -> 4, 6 -> 2, 7 -> 4, 8 -> 3, 9 -> 3}.
+Mofs := {10 -> 5, 11 -> 8, 12 -> 5, 13 -> 6, 14 -> 9, 15 -> 8, 16 -> 7, 17 -> 9, 18 -> 7, 19 -> 6}.
+Rofs := {10 -> 20, 11 -> 20, 12 -> 21, 13 -> 21, 14 -> 21, 15 -> 20, 16 -> 20, 17 -> 20, 18 -> 21, 19 -> 21}.
+SofR := {20 -> 1, 21 -> 1}.
+maxSection := 2.
+maxElement := 5.
+maxModule := 10.
+maxslot := 20.
+maxRack := 22.
+typeConfigObject := {1 -> Section__, 2 -> Element__, 3 -> Element__, 4 -> Element__, 5 -> Module__, 6 -> Module__, 7 -> Module__, 8 -> Module__, 9 -> Module__, 10 -> slot__, 11 -> slot__, 12 -> slot__, 13 -> slot__, 14 -> slot__, 15 -> slot__, 16 -> slot__, 17 -> slot__, 18 -> slot__, 19 -> slot__, 20 -> Rack__, 21 -> Rack__}.
+
+20.881 Expansion
+-------------------
+ConfigObject := {}.
+Section := {1}.
+Element := {2, 3, 4}.
+Module := {5, 6, 7, 8, 9}.
+slot := {10, 11, 12, 13, 14, 15, 16, 17, 18, 19}.
+Rack := {20, 21}.
+SofE := {2 -> 1, 3 -> 1, 4 -> 1}.
+EofM := {5 -> 4, 6 -> 2, 7 -> 4, 8 -> 3, 9 -> 3}.
+Mofs := {10 -> 5, 11 -> 8, 12 -> 5, 13 -> 6, 14 -> 9, 15 -> 8, 16 -> 7, 17 -> 9, 18 -> 7, 19 -> 6}.
+Rofs := {10 -> 20, 11 -> 20, 12 -> 21, 13 -> 21, 14 -> 21, 15 -> 20, 16 -> 20, 17 -> 20, 18 -> 21, 19 -> 21}.
+SofR := {20 -> 1, 21 -> 1}.
+typeConfigObject := {1 -> Section__, 2 -> Element__, 3 -> Element__, 4 -> Element__, 5 -> Module__, 6 -> Module__, 7 -> Module__, 8 -> Module__, 9 -> Module__, 10 -> slot__, 11 -> slot__, 12 -> slot__, 13 -> slot__, 14 -> slot__, 15 -> slot__, 16 -> slot__, 17 -> slot__, 18 -> slot__, 19 -> slot__, 20 -> Rack__, 21 -> Rack__}.
+-------------------
+Elapsed time: 20.936989068984985 seconds

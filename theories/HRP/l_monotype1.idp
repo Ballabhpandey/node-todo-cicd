@@ -1,0 +1,69 @@
+vocabulary V { 
+    type ConfigObject 
+    Thing: (ConfigObject) → 𝔹
+    Cabinet: (ConfigObject) → 𝔹
+    Room: (ConfigObject) → 𝔹
+    type Person 
+    ownerOfT: (Thing) → Person
+    cabinetOfT: (Thing) → Cabinet
+    roomOfC: (Cabinet) → Room
+    ownerOfR: (Room) → Person
+    highC: (Cabinet) → 𝔹
+    longT: (Thing) → 𝔹
+    var p ∈ Person
+    var t ∈ Thing
+    var c ∈ Cabinet
+    var r ∈ Room
+    maxThing: () → ℤ
+    maxCabinet: () → ℤ
+    maxRoom: () → ℤ
+    mulConfigObject: (ConfigObject) → ℤ
+    type TypeConfigObject := {Thing__, Cabinet__, Room__}
+    typeConfigObject : ConfigObject -> TypeConfigObject
+}
+theory T:V { 
+    [∀ c: #{t : cabinetOfT(t) = c} ≤ 5]
+      ∀ c ∈ Cabinet: sum(lambda t ∈ Thing : if cabinetOfT(t) = c then mulConfigObject(t) else 0) ≤ 5 ⨯ mulConfigObject(c).
+    [∀ r: #{c : roomOfC(c) = r} ≤ 4]
+      ∀ r ∈ Room: sum(lambda c ∈ Cabinet : if roomOfC(c) = r then mulConfigObject(c) else 0) ≤ 4 ⨯ mulConfigObject(r).
+    [∀ t: ownerOfT(t) = ownerOfR(roomOfC(cabinetOfT(t)))]
+      ∀ t ∈ Thing: ownerOfT(t) = ownerOfR(roomOfC(cabinetOfT(t))).
+    [∀ t: longT(t) ⇒ highC(cabinetOfT(t))]
+      ∀ t ∈ Thing: longT(t) ⇒ highC(cabinetOfT(t)).
+    [∀ r: #{c : ¬(highC(c))} + 2 ⨯ #{c : highC(c)} ≤ 4]
+      ∀ r ∈ Room: sum(lambda c ∈ Cabinet : if ¬(highC(c)) then mulConfigObject(c) else 0) + 2 ⨯ sum(lambda c ∈ Cabinet : if highC(c) then mulConfigObject(c) else 0) ≤ 4.
+    [#{t : ownerOfT(t) = P1} = 5]
+      sum(lambda t ∈ Thing : if ownerOfT(t) = P1 then mulConfigObject(t) else 0) = 5.
+    [#{t : ownerOfT(t) = P2} = 1]
+      sum(lambda t ∈ Thing : if ownerOfT(t) = P2 then mulConfigObject(t) else 0) = 1.
+    [#{t : ownerOfT(t) = P1 ∧ longT(t)} = 1]
+      sum(lambda t ∈ Thing : if ownerOfT(t) = P1 ∧ longT(t) then mulConfigObject(t) else 0) = 1.
+    [#{t : ownerOfT(t) = P2 ∧ longT(t)} = 1]
+      sum(lambda t ∈ Thing : if ownerOfT(t) = P2 ∧ longT(t) then mulConfigObject(t) else 0) = 1.
+    ∀ mulConfigObject0_ ∈ ConfigObject: 0 ≤ mulConfigObject(mulConfigObject0_).
+    ∀ t ∈ Thing: ∃ n__5sldkqsdf ∈ ℤ: mulConfigObject(t) = n__5sldkqsdf ⨯ mulConfigObject(cabinetOfT(t)).
+    ∀ c ∈ Cabinet: ∃ n__5sldkqsdf ∈ ℤ: mulConfigObject(c) = n__5sldkqsdf ⨯ mulConfigObject(roomOfC(c)).
+    
+    { !x in ConfigObject: typeConfigObject(x)=Thing__ <- Thing(x)& 0 < mulConfigObject(x).
+      !x in ConfigObject: typeConfigObject(x)=Cabinet__ <- Cabinet(x)& 0 < mulConfigObject(x).
+      !x in ConfigObject: typeConfigObject(x)=Room__ <- Room(x)& 0 < mulConfigObject(x).
+    }
+    {
+      !x in ConfigObject: typeConfigObject(x)=Thing__ <- 1 =< x < maxThing().
+      !x in ConfigObject: typeConfigObject(x)=Cabinet__ <- maxThing() =< x < maxCabinet().
+      !x in ConfigObject: typeConfigObject(x)=Room__ <- maxCabinet() =< x < maxRoom().
+    }
+
+    Person ≜ {P1, P2}.
+}
+
+procedure main() {
+    logging.getLogger().setLevel(logging.INFO)
+    interp, sol = Theory(T).generate(timeout_seconds=0, unsat_seconds=5)
+    pretty_print(sol)
+    print(duration("Expansion"))
+    print("-------------------")
+    print(Theory(T).expand_lifting(sol))
+    print("-------------------")
+}
+        

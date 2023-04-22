@@ -1,0 +1,15 @@
+vocabulary V {
+    type El
+    List_content : El → 𝔹
+    list_size: () -> Int
+    var e in El
+}
+
+theory T:V {
+    ~( list_size() = #{e: List_content(e)}
+       => (list_size()=0 <=> !e: ~List_content(e))
+    ).
+}
+
+structure S:V {
+}

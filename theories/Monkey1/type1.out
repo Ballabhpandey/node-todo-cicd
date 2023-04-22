@@ -1,0 +1,20 @@
+Monkey := {M2, M5, M7, M8, M9, M10}.
+Banana := {B1, B2, B3, B4, B5, B6, B7, B8, B9, B10, B11, B12}.
+Tree := {T1, T2}.
+ownerOfB := {B1 -> M9, B2 -> M5, B3 -> M2, B4 -> M8, B5 -> M2, B6 -> M8, B7 -> M10, B8 -> M9, B9 -> M10, B10 -> M7, B11 -> M5, B12 -> M7}.
+treeOfM := {M2 -> T1, M5 -> T2, M7 -> T1, M8 -> T1, M9 -> T2, M10 -> T2}.
+partnerOfM := {M2 -> M7, M5 -> M10, M7 -> M2, M8 -> M9, M9 -> M8, M10 -> M5}.
+
+29.676 Expansion
+-------------------
+Monkey_T := {}.
+Banana_T := {}.
+Tree_T := {}.
+Monkey := {M2, M5, M7, M8, M9, M10}.
+Banana := {B1, B2, B3, B4, B5, B6, B7, B8, B9, B10, B11, B12}.
+Tree := {T1, T2}.
+ownerOfB := {B1 -> M9, B2 -> M5, B3 -> M2, B4 -> M8, B5 -> M2, B6 -> M8, B7 -> M10, B8 -> M9, B9 -> M10, B10 -> M7, B11 -> M5, B12 -> M7}.
+treeOfM := {M2 -> T1, M5 -> T2, M7 -> T1, M8 -> T1, M9 -> T2, M10 -> T2}.
+partnerOfM := {M2 -> M7, M5 -> M10, M7 -> M2, M8 -> M9, M9 -> M8, M10 -> M5}.
+-------------------
+Elapsed time: 29.759392499923706 seconds

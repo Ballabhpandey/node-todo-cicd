@@ -1,0 +1,76 @@
+vocabulary V { 
+    type ConfigObject 
+    Section: (ConfigObject) → 𝔹
+    Element: (ConfigObject) → 𝔹
+    Module: (ConfigObject) → 𝔹
+    slot: (ConfigObject) → 𝔹
+    Rack: (ConfigObject) → 𝔹
+    SofE: (Element) → Section
+    EofM: (Module) → Element
+    s_has_Module: (slot) → 𝔹
+    Mofs: (slot) → Module
+    Rofs: (slot) → Rack
+    SofR: (Rack) → Section
+    var S ∈ Section
+    var E ∈ Element
+    var M ∈ Module
+    var s ∈ slot
+    var R ∈ Rack
+    maxSection: () → ℤ
+    maxElement: () → ℤ
+    maxModule: () → ℤ
+    maxslot: () → ℤ
+    maxRack: () → ℤ
+    mulConfigObject: (ConfigObject) → ℤ
+    type TypeConfigObject := {Section__, Element__, Module__, slot__, Rack__}
+    typeConfigObject : ConfigObject -> TypeConfigObject
+}
+theory T:V { 
+    [1 ≤ #{S : true}]
+      1 ≤ sum(lambda S ∈ Section : mulConfigObject(S)).
+    [3 ≤ #{E : true}]
+      3 ≤ sum(lambda E ∈ Element : mulConfigObject(E)).
+    [∀ S: 1 ≤ #{E : SofE(E) = S} ≤ 20]
+      ∀ S ∈ Section: 1 ⨯ mulConfigObject(S) ≤ sum(lambda E ∈ Element : if SofE(E) = S then mulConfigObject(E) else 0) ≤ 20 ⨯ mulConfigObject(S).
+    [∀ E: 1 ≤ #{M : EofM(M) = E} ≤ 8]
+      ∀ E ∈ Element: 1 ⨯ mulConfigObject(E) ≤ sum(lambda M ∈ Module : if EofM(M) = E then mulConfigObject(M) else 0) ≤ 8 ⨯ mulConfigObject(E).
+    [∀ M: #{s : Mofs(s) = M} = 2]
+      ∀ M ∈ Module: sum(lambda s ∈ slot : if Mofs(s) = M then mulConfigObject(s) else 0) = 2 ⨯ mulConfigObject(M).
+    [∀ R: #{s : Rofs(s) = R} = 5]
+      ∀ R ∈ Rack: sum(lambda s ∈ slot : if Rofs(s) = R then mulConfigObject(s) else 0) = 5 ⨯ mulConfigObject(R).
+    [∀ S: 1 ≤ #{R : SofR(R) = S} ≤ 2]
+      ∀ S ∈ Section: 1 ⨯ mulConfigObject(S) ≤ sum(lambda R ∈ Rack : if SofR(R) = S then mulConfigObject(R) else 0) ≤ 2 ⨯ mulConfigObject(S).
+    ∀ mulConfigObject0_ ∈ ConfigObject: 0 ≤ mulConfigObject(mulConfigObject0_).
+    ∀ E ∈ Element: ∃ n__5sldkqsdf ∈ ℤ: mulConfigObject(E) = n__5sldkqsdf ⨯ mulConfigObject(SofE(E)).
+    ∀ M ∈ Module: ∃ n__5sldkqsdf ∈ ℤ: mulConfigObject(M) = n__5sldkqsdf ⨯ mulConfigObject(EofM(M)).
+    ∀ s ∈ slot: ∃ n__5sldkqsdf ∈ ℤ: mulConfigObject(s) = n__5sldkqsdf ⨯ mulConfigObject(Mofs(s)).
+    ∀ s ∈ slot: ∃ n__5sldkqsdf ∈ ℤ: mulConfigObject(s) = n__5sldkqsdf ⨯ mulConfigObject(Rofs(s)).
+    ∀ R ∈ Rack: ∃ n__5sldkqsdf ∈ ℤ: mulConfigObject(R) = n__5sldkqsdf ⨯ mulConfigObject(SofR(R)).
+    
+    { !x in ConfigObject: typeConfigObject(x)=Section__ <- Section(x)& 0 < mulConfigObject(x).
+      !x in ConfigObject: typeConfigObject(x)=Element__ <- Element(x)& 0 < mulConfigObject(x).
+      !x in ConfigObject: typeConfigObject(x)=Module__ <- Module(x)& 0 < mulConfigObject(x).
+      !x in ConfigObject: typeConfigObject(x)=slot__ <- slot(x)& 0 < mulConfigObject(x).
+      !x in ConfigObject: typeConfigObject(x)=Rack__ <- Rack(x)& 0 < mulConfigObject(x).
+    }
+    {
+      !x in ConfigObject: typeConfigObject(x)=Section__ <- 1 =< x < maxSection().
+      !x in ConfigObject: typeConfigObject(x)=Element__ <- maxSection() =< x < maxElement().
+      !x in ConfigObject: typeConfigObject(x)=Module__ <- maxElement() =< x < maxModule().
+      !x in ConfigObject: typeConfigObject(x)=slot__ <- maxModule() =< x < maxslot().
+      !x in ConfigObject: typeConfigObject(x)=Rack__ <- maxslot() =< x < maxRack().
+    }
+
+    
+}
+
+procedure main() {
+    logging.getLogger().setLevel(logging.INFO)
+    interp, sol = Theory(T).generate(timeout_seconds=0, unsat_seconds=5)
+    pretty_print(sol)
+    print(duration("Expansion"))
+    print("-------------------")
+    print(Theory(T).expand_lifting(sol))
+    print("-------------------")
+}
+        

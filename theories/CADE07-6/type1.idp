@@ -1,0 +1,28 @@
+vocabulary V { 
+    type El_T 
+    El: (El_T) → 𝔹
+    C: (El) → 𝔹
+    C1: (El) → 𝔹
+    alloc0: (El) → 𝔹
+    alloc1: (El) → 𝔹
+    alloc2: (El) → 𝔹
+    c: () → El
+    var e ∈ El
+}
+theory T:V { 
+    ¬((C(c()) ∧ (∀ e: C1(e) ⇔ C(e) ∧ e ≠ c()) ∧ #{e : alloc1(e) ∧ ¬(alloc0(e))} ≤ 1 ∧ #{e : alloc2(e) ∧ ¬(alloc1(e))} ≤ #{e : C1(e)} ⇒ #{e : alloc2(e) ∧ ¬(alloc0(e))} ≤ #{e : C(e)})).
+    
+    
+    
+}
+
+procedure main() {
+    logging.getLogger().setLevel(logging.INFO)
+    interp, sol = Theory(T).generate(timeout_seconds=0)
+    pretty_print(sol)
+    print(duration("Expansion"))
+    print("-------------------")
+    print(Theory(T).expand_lifting(sol))
+    print("-------------------")
+}
+        

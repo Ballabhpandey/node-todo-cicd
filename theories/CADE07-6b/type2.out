@@ -1,0 +1,28 @@
+El := {1, 2}.
+l1 := {1, 2}.
+this := {1}.
+Object_alloc := {2}.
+Object_alloc_16 := {1, 2}.
+Object_alloc_30 := {1, 2}.
+Object_alloc_45 := {2}.
+Object_alloc_60 := {2}.
+S1_42 := {2}.
+S2_41 := {}.
+tmp_3_57 := 2.
+
+0.065 Expansion
+-------------------
+El_T := {}.
+El := {1, 2}.
+l1 := {1, 2}.
+this := {1}.
+Object_alloc := {2}.
+Object_alloc_16 := {1, 2}.
+Object_alloc_30 := {1, 2}.
+Object_alloc_45 := {2}.
+Object_alloc_60 := {2}.
+S1_42 := {2}.
+S2_41 := {}.
+tmp_3_57 := {-> 2}.
+-------------------
+Elapsed time: 0.11629986763000488 seconds

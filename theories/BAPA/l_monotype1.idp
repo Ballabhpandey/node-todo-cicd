@@ -1,0 +1,40 @@
+vocabulary V { 
+    type ConfigObject 
+    El: (ConfigObject) → 𝔹
+    A: (El) → 𝔹
+    B: (El) → 𝔹
+    C: (El) → 𝔹
+    var e ∈ El
+    maxEl: () → ℤ
+    mulConfigObject: (ConfigObject) → ℤ
+    type TypeConfigObject := {El__}
+    typeConfigObject : ConfigObject -> TypeConfigObject
+}
+theory T:V { 
+    [#{e : A(e)} > 1]
+      sum(lambda e ∈ El : if A(e) then mulConfigObject(e) else 0) > 1.
+    [∀ e: A(e) ⇒ B(e)]
+      ∀ e ∈ El: A(e) ⇒ B(e).
+    [#{e : B(e) ∧ C(e)} ≤ 2]
+      sum(lambda e ∈ El : if B(e) ∧ C(e) then mulConfigObject(e) else 0) ≤ 2.
+    ∀ mulConfigObject0_ ∈ ConfigObject: 0 ≤ mulConfigObject(mulConfigObject0_).
+    
+    { !x in ConfigObject: typeConfigObject(x)=El__ <- El(x)& 0 < mulConfigObject(x).
+    }
+    {
+      !x in ConfigObject: typeConfigObject(x)=El__ <- 1 =< x < maxEl().
+    }
+
+    
+}
+
+procedure main() {
+    logging.getLogger().setLevel(logging.INFO)
+    interp, sol = Theory(T).generate(timeout_seconds=0)
+    pretty_print(sol)
+    print(duration("Expansion"))
+    print("-------------------")
+    print(Theory(T).expand_lifting(sol))
+    print("-------------------")
+}
+        

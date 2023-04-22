@@ -1,0 +1,32 @@
+[tool.poetry]
+name = "IDP-Z3 generative"
+version = "0.1.0"
+description = "Benchmarks of IDP-Z3 for generative configuration problems"
+authors = ["Pierre <pierre.carbonnelle@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = ">=3.8, <4.0"
+Click="^7.0"
+textX="^2.1.0"
+z3-solver = "^4.8.12.0"
+python-dateutil = "^2.8.2"
+Flask="^1.1.1"
+Flask-Cors="^3.0.8"
+Flask-RESTful="^0.3.8"
+fast-html = "^1.0.2"
+PyYAML = "^5.4.1"
+perfplot = "^0.10.2"
+cpmpy = "^0.9.12"
+graphviz = "^0.20.1"
+matplotlib = "^3.7.1"
+minizinc = "^0.9.0"
+ipykernel = "^6.22.0"
+
+
+[tool.poetry.dev-dependencies]
+pretty-errors = "^1.2.19"
+pyinstrument = "^3.4.2"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

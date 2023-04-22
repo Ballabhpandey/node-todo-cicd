@@ -1,0 +1,38 @@
+vocabulary V { 
+    type Thing_T 
+    Thing: (Thing_T) → 𝔹
+    type Cabinet_T 
+    Cabinet: (Cabinet_T) → 𝔹
+    type Room_T 
+    Room: (Room_T) → 𝔹
+    type Person 
+    ownerOfT: (Thing) → Person
+    cabinetOfT: (Thing) → Cabinet
+    roomOfC: (Cabinet) → Room
+    ownerOfR: (Room) → Person
+    var p ∈ Person
+    var t ∈ Thing
+    var c ∈ Cabinet
+    var r ∈ Room
+}
+theory T:V { 
+    ∀ c: #{t : cabinetOfT(t) = c} ≤ 5.
+    ∀ r: #{c : roomOfC(c) = r} ≤ 4.
+    ∀ t: ownerOfT(t) = ownerOfR(roomOfC(cabinetOfT(t))).
+    #{t : ownerOfT(t) = P1} = 5.
+    #{t : ownerOfT(t) = P2} = 1.
+    
+    
+    Person ≜ {P1, P2}.
+}
+
+procedure main() {
+    logging.getLogger().setLevel(logging.INFO)
+    interp, sol = Theory(T).generate(timeout_seconds=0, unsat_seconds=5)
+    pretty_print(sol)
+    print(duration("Expansion"))
+    print("-------------------")
+    print(Theory(T).expand_lifting(sol))
+    print("-------------------")
+}
+        

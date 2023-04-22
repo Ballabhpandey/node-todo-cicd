@@ -1,0 +1,24 @@
+vocabulary V { 
+    type El_T 
+    El: (El_T) → 𝔹
+    List_content: (El) → 𝔹
+    list_size: () → ℤ
+    var e ∈ El
+}
+theory T:V { 
+    ¬((list_size() = #{e : List_content(e)} ⇒ (list_size() = 0 ⇔ (∀ e: ¬(List_content(e)))))).
+    
+    
+    
+}
+
+procedure main() {
+    logging.getLogger().setLevel(logging.INFO)
+    interp, sol = Theory(T).generate(factor=1.5, timeout_seconds=0)
+    pretty_print(sol)
+    print(duration("Expansion"))
+    print("-------------------")
+    print(Theory(T).expand_lifting(sol))
+    print("-------------------")
+}
+        

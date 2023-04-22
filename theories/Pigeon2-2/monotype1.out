@@ -1,0 +1,6 @@
+Pigeon := {1, 2, 3, 4}.
+Hole := {5, 6, 7, 8}.
+inHole := {(1, 5), (1, 6), (2, 5), (2, 7), (3, 7), (3, 8), (4, 6), (4, 8)}.
+maxPigeon := 5.
+maxHole := 9.
+typeConfigObject := {1 -> Pigeon__, 2 -> Pigeon__, 3 -> Pigeon__, 4 -> Pigeon__, 5 -> Hole__, 6 -> Hole__, 7 -> Hole__, 8 -> Hole__}.

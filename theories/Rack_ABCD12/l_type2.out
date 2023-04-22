@@ -1,0 +1,35 @@
+Rack := {R1}.
+Frame := {F1, F2, F3}.
+Module := {M1, M2, M3, M4, M6}.
+Element := {E1, E6, E12, E13}.
+module14 := {M1, M2, M3, M4}.
+typeOfR := {R1 -> RackSingle}.
+typeOfM := {M1 -> ModuleIV, M2 -> ModuleII, M3 -> ModuleIII, M4 -> ModuleI, M6 -> ModuleV}.
+typeOfE := {E1 -> ElementD, E6 -> ElementA, E12 -> ElementC, E13 -> ElementB}.
+rackOfF := {F1 -> R1, F2 -> R1, F3 -> R1}.
+frameOfM := {M1 -> F2, M2 -> F2, M3 -> F1, M4 -> F3, M6 -> F2}.
+elementOfM := {M1 -> E1, M2 -> E13, M3 -> E12, M4 -> E6}.
+mulRack_T := {R1 -> 3}.
+mulFrame_T := {F1 -> 3, F2 -> 6, F3 -> 3}.
+mulModule_T := {M1 -> 12, M2 -> 6, M3 -> 9, M4 -> 3, M5 -> 0, M6 -> 6}.
+mulElement_T := {E1 -> 3, E2 -> 0, E3 -> 0, E4 -> 0, E5 -> 0, E6 -> 3, E7 -> 0, E8 -> 0, E9 -> 0, E10 -> 0, E11 -> 0, E12 -> 3, E13 -> 3}.
+
+5.44 Expansion
+-------------------
+Rack_T := {1, 2, 3}.
+Frame_T := {4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15}.
+Module_T := {16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51}.
+Element_T := {52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63}.
+Rack := {1, 2, 3}.
+Frame := {4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15}.
+Module := {16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51}.
+Element := {52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63}.
+module14 := {16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45}.
+typeOfR := {1 -> RackSingle, 2 -> RackSingle, 3 -> RackSingle}.
+typeOfM := {16 -> ModuleIV, 17 -> ModuleIV, 18 -> ModuleIV, 19 -> ModuleIV, 20 -> ModuleIV, 21 -> ModuleIV, 22 -> ModuleIV, 23 -> ModuleIV, 24 -> ModuleIV, 25 -> ModuleIV, 26 -> ModuleIV, 27 -> ModuleIV, 28 -> ModuleII, 29 -> ModuleII, 30 -> ModuleII, 31 -> ModuleII, 32 -> ModuleII, 33 -> ModuleII, 34 -> ModuleIII, 35 -> ModuleIII, 36 -> ModuleIII, 37 -> ModuleIII, 38 -> ModuleIII, 39 -> ModuleIII, 40 -> ModuleIII, 41 -> ModuleIII, 42 -> ModuleIII, 43 -> ModuleI, 44 -> ModuleI, 45 -> ModuleI, 46 -> ModuleV, 47 -> ModuleV, 48 -> ModuleV, 49 -> ModuleV, 50 -> ModuleV, 51 -> ModuleV}.
+typeOfE := {52 -> ElementD, 53 -> ElementD, 54 -> ElementD, 55 -> ElementA, 56 -> ElementA, 57 -> ElementA, 58 -> ElementC, 59 -> ElementC, 60 -> ElementC, 61 -> ElementB, 62 -> ElementB, 63 -> ElementB}.
+rackOfF := {4 -> 1, 5 -> 2, 6 -> 3, 7 -> 1, 8 -> 2, 9 -> 3, 10 -> 1, 11 -> 2, 12 -> 3, 13 -> 1, 14 -> 2, 15 -> 3}.
+frameOfM := {16 -> 7, 17 -> 8, 18 -> 9, 19 -> 10, 20 -> 11, 21 -> 12, 22 -> 7, 23 -> 8, 24 -> 9, 25 -> 10, 26 -> 11, 27 -> 12, 28 -> 7, 29 -> 8, 30 -> 9, 31 -> 10, 32 -> 11, 33 -> 12, 34 -> 4, 35 -> 5, 36 -> 6, 37 -> 4, 38 -> 5, 39 -> 6, 40 -> 4, 41 -> 5, 42 -> 6, 43 -> 13, 44 -> 14, 45 -> 15, 46 -> 7, 47 -> 8, 48 -> 9, 49 -> 10, 50 -> 11, 51 -> 12}.
+elementOfM := {16 -> 52, 17 -> 53, 18 -> 54, 19 -> 52, 20 -> 53, 21 -> 54, 22 -> 52, 23 -> 53, 24 -> 54, 25 -> 52, 26 -> 53, 27 -> 54, 28 -> 61, 29 -> 62, 30 -> 63, 31 -> 61, 32 -> 62, 33 -> 63, 34 -> 58, 35 -> 59, 36 -> 60, 37 -> 58, 38 -> 59, 39 -> 60, 40 -> 58, 41 -> 59, 42 -> 60, 43 -> 55, 44 -> 56, 45 -> 57}.
+-------------------
+Elapsed time: 5.547942161560059 seconds

@@ -1,0 +1,31 @@
+Rack := {R2}.
+Frame := {F1, F2, F3, F4}.
+Module := {M2, M4, M6, M7, M8}.
+Element := {E3, E7, E8, E13, E19}.
+module14 := {M2, M4, M6, M7, M8}.
+typeOfR := {R2 -> RackSingle}.
+typeOfM := {M2 -> ModuleI, M4 -> ModuleI, M6 -> ModuleI, M7 -> ModuleI, M8 -> ModuleI}.
+typeOfE := {E3 -> ElementA, E7 -> ElementA, E8 -> ElementA, E13 -> ElementA, E19 -> ElementA}.
+rackOfF := {F1 -> R2, F2 -> R2, F3 -> R2, F4 -> R2}.
+frameOfM := {M2 -> F1, M4 -> F1, M6 -> F3, M7 -> F1, M8 -> F3}.
+elementOfM := {M2 -> E3, M4 -> E13, M6 -> E7, M7 -> E8, M8 -> E19}.
+
+3.208 Expansion
+-------------------
+Rack_T := {}.
+Frame_T := {}.
+Module_T := {}.
+Element_T := {}.
+Rack := {R2}.
+Frame := {F1, F2, F3, F4}.
+Module := {M2, M4, M6, M7, M8}.
+Element := {E3, E7, E8, E13, E19}.
+module14 := {M2, M4, M6, M7, M8}.
+typeOfR := {R2 -> RackSingle}.
+typeOfM := {M2 -> ModuleI, M4 -> ModuleI, M6 -> ModuleI, M7 -> ModuleI, M8 -> ModuleI}.
+typeOfE := {E3 -> ElementA, E7 -> ElementA, E8 -> ElementA, E13 -> ElementA, E19 -> ElementA}.
+rackOfF := {F1 -> R2, F2 -> R2, F3 -> R2, F4 -> R2}.
+frameOfM := {M2 -> F1, M4 -> F1, M6 -> F3, M7 -> F1, M8 -> F3}.
+elementOfM := {M2 -> E3, M4 -> E13, M6 -> E7, M7 -> E8, M8 -> E19}.
+-------------------
+Elapsed time: 3.2759132385253906 seconds

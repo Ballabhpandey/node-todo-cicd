@@ -1,0 +1,62 @@
+vocabulary V { 
+    type ConfigObject 
+    Section: (ConfigObject) → 𝔹
+    Element: (ConfigObject) → 𝔹
+    Module: (ConfigObject) → 𝔹
+    slot: (ConfigObject) → 𝔹
+    Rack: (ConfigObject) → 𝔹
+    SofE: (Element) → Section
+    EofM: (Module) → Element
+    s_has_Module: (slot) → 𝔹
+    Mofs: (slot) → Module
+    Rofs: (slot) → Rack
+    SofR: (Rack) → Section
+    var S ∈ Section
+    var E ∈ Element
+    var M ∈ Module
+    var s ∈ slot
+    var R ∈ Rack
+    maxSection: () → ℤ
+    maxElement: () → ℤ
+    maxModule: () → ℤ
+    maxslot: () → ℤ
+    maxRack: () → ℤ
+    type TypeConfigObject := {Section__, Element__, Module__, slot__, Rack__}
+    typeConfigObject : ConfigObject -> TypeConfigObject
+}
+theory T:V { 
+    1 ≤ #{S : true}.
+    3 ≤ #{E : true}.
+    ∀ S: 1 ≤ #{E : SofE(E) = S} ≤ 20.
+    ∀ E: 1 ≤ #{M : EofM(M) = E} ≤ 8.
+    ∀ M: #{s : Mofs(s) = M} = 2.
+    ∀ R: #{s : Rofs(s) = R} = 5.
+    ∀ S: 1 ≤ #{R : SofR(R) = S} ≤ 2.
+    
+    { !x in ConfigObject: typeConfigObject(x)=Section__ <- Section(x).
+      !x in ConfigObject: typeConfigObject(x)=Element__ <- Element(x).
+      !x in ConfigObject: typeConfigObject(x)=Module__ <- Module(x).
+      !x in ConfigObject: typeConfigObject(x)=slot__ <- slot(x).
+      !x in ConfigObject: typeConfigObject(x)=Rack__ <- Rack(x).
+    }
+    {
+      !x in ConfigObject: typeConfigObject(x)=Section__ <- 1 =< x < maxSection().
+      !x in ConfigObject: typeConfigObject(x)=Element__ <- maxSection() =< x < maxElement().
+      !x in ConfigObject: typeConfigObject(x)=Module__ <- maxElement() =< x < maxModule().
+      !x in ConfigObject: typeConfigObject(x)=slot__ <- maxModule() =< x < maxslot().
+      !x in ConfigObject: typeConfigObject(x)=Rack__ <- maxslot() =< x < maxRack().
+    }
+
+    
+}
+
+procedure main() {
+    logging.getLogger().setLevel(logging.INFO)
+    interp, sol = Theory(T).generate(timeout_seconds=0, unsat_seconds=5)
+    pretty_print(sol)
+    print(duration("Expansion"))
+    print("-------------------")
+    print(Theory(T).expand_lifting(sol))
+    print("-------------------")
+}
+        

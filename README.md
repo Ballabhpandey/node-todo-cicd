@@ -1,6 +1,4 @@
-
-# IDP-Z3-generative
-hdhdhd
+hiddadhdhd
 Programs used to benchmark IDP-Z3 for generative configuration problems.
 
 ## Installation

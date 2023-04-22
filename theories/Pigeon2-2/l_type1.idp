@@ -1,0 +1,37 @@
+vocabulary V { 
+    type Pigeon_T 
+    Pigeon: (Pigeon_T) → 𝔹
+    type Hole_T 
+    Hole: (Hole_T) → 𝔹
+    inHole: (Pigeon⨯Hole) → 𝔹
+    var p ∈ Pigeon
+    var h ∈ Hole
+    mulPigeon_T: (Pigeon_T) → ℤ
+    mulHole_T: (Hole_T) → ℤ
+}
+theory T:V { 
+    [#{p : true} = 4]
+      sum(lambda p ∈ Pigeon : mulPigeon_T(p)) = 4.
+    [∀ h: #{p : inHole(p, h)} = 2]
+      ∀ h ∈ Hole: sum(lambda p ∈ Pigeon : if inHole(p, h) then mulPigeon_T(p) else 0) = 2.
+    [∀ p: #{h : inHole(p, h)} = 2]
+      ∀ p ∈ Pigeon: sum(lambda h ∈ Hole : if inHole(p, h) then mulHole_T(h) else 0) = 2.
+    ∀ mulPigeon_T0_ ∈ Pigeon_T: 0 ≤ mulPigeon_T(mulPigeon_T0_).
+    ∀ mulHole_T0_ ∈ Hole_T: 0 ≤ mulHole_T(mulHole_T0_).
+    
+    ! x in Pigeon_T: Pigeon(x) <=> 0 < mulPigeon_T(x).
+    ! x in Hole_T: Hole(x) <=> 0 < mulHole_T(x).
+    ∀ p ∈ Pigeon, h ∈ Hole: ∀ n, m ∈ Int: 0 < n < mulPigeon_T(p) ∧ 0 < m < mulHole_T(h) ⇒ mulPigeon_T(p) * m ≠ mulHole_T(h) * n.
+    
+}
+
+procedure main() {
+    logging.getLogger().setLevel(logging.INFO)
+    interp, sol = Theory(T).generate(timeout_seconds=0)
+    pretty_print(sol)
+    print(duration("Expansion"))
+    print("-------------------")
+    print(Theory(T).expand_lifting(sol))
+    print("-------------------")
+}
+        

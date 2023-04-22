@@ -1,0 +1,1 @@
+ T  Command '['poetry', 'run', 'python3.10', '../IDP-Z3/idp-engine.py', './theories/Monkey4/monotype1.idp']' timed out after 120 seconds

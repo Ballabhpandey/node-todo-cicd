@@ -1,0 +1,44 @@
+vocabulary V { 
+    type Unit_T 
+    Unit: (Unit_T) → 𝔹
+    type Zone := {Z1, Z2345678, Z2367, Z2378, Z45, Z456, Z6, UnusedZ}
+    type Door := {D01, D12, D78, D34, D56, D67, D36, D26, UnusedD}
+    ZD: (Zone⨯Door) → 𝔹
+    z1: (Unit) → Zone
+    z2: (Unit) → Zone
+    d1: (Unit) → Door
+    d2: (Unit) → Door
+    p1: (Unit) → Unit
+    p2: (Unit) → Unit
+    var Z ∈ Zone
+    var D ∈ Door
+    var U ∈ Unit
+    mulUnit_T: (Unit_T) → ℤ
+}
+theory T:V { 
+    [∀ D: D ≠ UnusedD ⇒ (∃ U: d1(U) = D ∨ d2(U) = D)]
+      ∀ D ∈ Door: ¬(D = UnusedD) ⇒ (∃ U ∈ Unit: d1(U) = D ∨ d2(U) = D).
+    [∀ Z: Z ≠ UnusedZ ⇒ (∃ U: z1(U) = Z ∨ z2(U) = Z)]
+      ∀ Z ∈ Zone: ¬(Z = UnusedZ) ⇒ (∃ U ∈ Unit: z1(U) = Z ∨ z2(U) = Z).
+    [∀ U1,U2,Z,D: (d1(U1) = D ∨ d2(U1) = D) ∧ ZD(Z, D) ∧ (z1(U2) = Z ∨ z2(U2) = Z) ∧ U1 ≠ U2 ⇒ (p1(U1) = U2 ∨ p2(U1) = U2) ∧ (p1(U2) = U1 ∨ p2(U2) = U1)]
+      ∀ U1 ∈ Unit,U2 ∈ Unit,Z ∈ Zone,D ∈ Door: (d1(U1) = D ∨ d2(U1) = D) ∧ ZD(Z, D) ∧ (z1(U2) = Z ∨ z2(U2) = Z) ∧ ¬(U1 = U2) ⇒ (p1(U1) = U2 ∨ p2(U1) = U2) ∧ (p1(U2) = U1 ∨ p2(U2) = U1).
+    ∀ mulUnit_T0_ ∈ Unit_T: 0 ≤ mulUnit_T(mulUnit_T0_).
+    ∀ D ∈ Door: ∀ Z ∈ Zone: ∀ U2 ∈ Unit: ∀ U1 ∈ Unit: (if 1 < mulUnit_T(U1) then 1 else 0) + (if 1 < mulUnit_T(U2) then 1 else 0) + (0) + (0) ≤ 1.
+    ∀ p10_ ∈ Unit: ∃ n__5sldkqsdf ∈ ℤ: mulUnit_T(p10_) = n__5sldkqsdf ⨯ mulUnit_T(p1(p10_)).
+    ∀ p20_ ∈ Unit: ∃ n__5sldkqsdf ∈ ℤ: mulUnit_T(p20_) = n__5sldkqsdf ⨯ mulUnit_T(p2(p20_)).
+    
+    ! x in Unit_T: Unit(x) <=> 0 < mulUnit_T(x).
+    ∀ U ∈ Unit, D ∈ Door: ∀ n, m ∈ Int: 0 < n < mulUnit_T(U) ∧ 0 < m < 1 ⇒ mulUnit_T(U) * m ≠ 1 * n.
+    ZD ≜ {(Z1,D01), (Z1,D12), (Z2345678,D12), (Z2367,D12), (Z2367,D78), (Z2367,D34), (Z2367,D56), (Z2378,D12), (Z2378,D34), (Z2378,D67), (Z2378,D36), (Z2378,D26), (Z45,D34), (Z45,D56), (Z456,D34), (Z456,D67), (Z456,D36), (Z456,D26), (Z6,D56), (Z6,D67), (Z6,D36), (Z6,D26)}.
+}
+
+procedure main() {
+    logging.getLogger().setLevel(logging.INFO)
+    interp, sol = Theory(T).generate(timeout_seconds=0, unsat_seconds=5)
+    pretty_print(sol)
+    print(duration("Expansion"))
+    print("-------------------")
+    print(Theory(T).expand_lifting(sol))
+    print("-------------------")
+}
+        

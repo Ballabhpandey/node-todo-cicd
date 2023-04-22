@@ -1,0 +1,28 @@
+Thing := {1, 2, 3, 4, 5, 6}.
+Cabinet := {7, 8, 9, 10}.
+Room := {11, 12, 13}.
+UNUSED := {}.
+ownerOfT := {1 -> P1, 2 -> P1, 3 -> P1, 4 -> P1, 5 -> P1, 6 -> P2}.
+cabinetOfT := {1 -> 7, 2 -> 7, 3 -> 8, 4 -> 9, 5 -> 7, 6 -> 10}.
+roomOfC := {7 -> 13, 8 -> 12, 9 -> 12, 10 -> 11}.
+ownerOfR := {11 -> P2, 12 -> P1, 13 -> P1}.
+maxThing := 7.
+maxCabinet := 11.
+maxRoom := 14.
+// maxUNUSED := *.
+typeConfigObject := {1 -> Thing__, 2 -> Thing__, 3 -> Thing__, 4 -> Thing__, 5 -> Thing__, 6 -> Thing__, 7 -> Cabinet__, 8 -> Cabinet__, 9 -> Cabinet__, 10 -> Cabinet__, 11 -> Room__, 12 -> Room__, 13 -> Room__}.
+
+1.112 Expansion
+-------------------
+ConfigObject := {}.
+Thing := {1, 2, 3, 4, 5, 6}.
+Cabinet := {7, 8, 9, 10}.
+Room := {11, 12, 13}.
+UNUSED := {}.
+ownerOfT := {1 -> P1, 2 -> P1, 3 -> P1, 4 -> P1, 5 -> P1, 6 -> P2}.
+cabinetOfT := {1 -> 7, 2 -> 7, 3 -> 8, 4 -> 9, 5 -> 7, 6 -> 10}.
+roomOfC := {7 -> 13, 8 -> 12, 9 -> 12, 10 -> 11}.
+ownerOfR := {11 -> P2, 12 -> P1, 13 -> P1}.
+typeConfigObject := {1 -> Thing__, 2 -> Thing__, 3 -> Thing__, 4 -> Thing__, 5 -> Thing__, 6 -> Thing__, 7 -> Cabinet__, 8 -> Cabinet__, 9 -> Cabinet__, 10 -> Cabinet__, 11 -> Room__, 12 -> Room__, 13 -> Room__}.
+-------------------
+Elapsed time: 1.1648037433624268 seconds

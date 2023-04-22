@@ -1,0 +1,58 @@
+vocabulary V { 
+    type ConfigObject 
+    Pigeon: (ConfigObject) → 𝔹
+    Hole: (ConfigObject) → 𝔹
+    Relation: (ConfigObject) → 𝔹
+    UNUSED: (ConfigObject) → 𝔹
+    pigeonOfR: (Relation) → Pigeon
+    holeOfR: (Relation) → Hole
+    var p ∈ Pigeon
+    var h ∈ Hole
+    var r ∈ Relation
+    maxPigeon: () → ℤ
+    maxHole: () → ℤ
+    maxRelation: () → ℤ
+    maxUNUSED: () → ℤ
+    mulConfigObject: (ConfigObject) → ℤ
+    type TypeConfigObject := {Pigeon__, Hole__, Relation__, UNUSED__}
+    typeConfigObject : ConfigObject -> TypeConfigObject
+}
+theory T:V { 
+    [#{p : true} = 1]
+      sum(lambda p ∈ Pigeon : mulConfigObject(p)) = 1.
+    [∀ p: #{r : pigeonOfR(r) = p} = 2]
+      ∀ p ∈ Pigeon: sum(lambda r ∈ Relation : if pigeonOfR(r) = p then mulConfigObject(r) else 0) = 2 ⨯ mulConfigObject(p).
+    [∀ h: #{r : holeOfR(r) = h} = 2]
+      ∀ h ∈ Hole: sum(lambda r ∈ Relation : if holeOfR(r) = h then mulConfigObject(r) else 0) = 2 ⨯ mulConfigObject(h).
+    [∀ h,p: #{r : pigeonOfR(r) = p ∧ holeOfR(r) = h} ≤ 1]
+      ∀ h ∈ Hole,p ∈ Pigeon: sum(lambda r ∈ Relation : if pigeonOfR(r) = p ∧ holeOfR(r) = h then mulConfigObject(r) else 0) ≤ 1.
+    ∀ mulConfigObject0_ ∈ ConfigObject: 0 ≤ mulConfigObject(mulConfigObject0_).
+    ∀ r ∈ Relation: ∃ n__5sldkqsdf ∈ ℤ: mulConfigObject(r) = n__5sldkqsdf ⨯ mulConfigObject(pigeonOfR(r)).
+    ∀ r ∈ Relation: ∃ n__5sldkqsdf ∈ ℤ: mulConfigObject(r) = n__5sldkqsdf ⨯ mulConfigObject(holeOfR(r)).
+    ∀ p ∈ Pigeon: ∀ h ∈ Hole: ∀ r ∈ Relation: (if 1 < mulConfigObject(r) then 1 else 0) + (if 1 < mulConfigObject(h) then 1 else 0) + (if 1 < mulConfigObject(p) then 1 else 0) ≤ 1.
+    
+    { !x in ConfigObject: typeConfigObject(x)=Pigeon__ <- Pigeon(x)& 0 < mulConfigObject(x).
+      !x in ConfigObject: typeConfigObject(x)=Hole__ <- Hole(x)& 0 < mulConfigObject(x).
+      !x in ConfigObject: typeConfigObject(x)=Relation__ <- Relation(x)& 0 < mulConfigObject(x).
+      !x in ConfigObject: typeConfigObject(x)=UNUSED__ <- UNUSED(x)& 0 < mulConfigObject(x).
+    }
+    {
+      !x in ConfigObject: typeConfigObject(x)=Pigeon__ <- 1 =< x < maxPigeon().
+      !x in ConfigObject: typeConfigObject(x)=Hole__ <- maxPigeon() =< x < maxHole().
+      !x in ConfigObject: typeConfigObject(x)=Relation__ <- maxHole() =< x < maxRelation().
+      !x in ConfigObject: typeConfigObject(x)=UNUSED__ <- maxRelation() =< x < maxUNUSED().
+    }
+∀ h ∈ Hole, p ∈ Pigeon: ∀ n, m ∈ Int: 0 < n < mulConfigObject(h) ∧ 0 < m < mulConfigObject(p) ⇒ mulConfigObject(h) * m ≠ mulConfigObject(p) * n.
+    
+}
+
+procedure main() {
+    logging.getLogger().setLevel(logging.INFO)
+    interp, sol = Theory(T).generate(factor=1.5, timeout_seconds=0)
+    pretty_print(sol)
+    print(duration("Expansion"))
+    print("-------------------")
+    print(Theory(T).expand_lifting(sol))
+    print("-------------------")
+}
+        

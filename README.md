@@ -1,3 +1,16 @@
+
+# IDP-Z3-generative
+
+Programs used to benchmark IDP-Z3 for generative configuration problems.
+
+## Installation
+
+Instal Python 3 and poetry.
+
+> poetry install
+> poetry run test.py
+
+
 # ad
 
 

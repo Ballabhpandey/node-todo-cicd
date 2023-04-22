@@ -1,0 +1,14 @@
+vocabulary V {
+    type El
+    A, B, C : El → 𝔹
+    var e in El
+}
+
+theory T:V {
+    #{e: A(e)} > 1.
+    !e : A(e) => B(e).
+    #{e: B(e) & C(e)} =< 2.
+}
+
+structure S:V {
+}

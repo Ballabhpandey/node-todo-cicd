@@ -1,0 +1,82 @@
+vocabulary V { 
+    type ConfigObject 
+    Rack: (ConfigObject) → 𝔹
+    Frame: (ConfigObject) → 𝔹
+    Module: (ConfigObject) → 𝔹
+    Element: (ConfigObject) → 𝔹
+    type RackType := {RackSingle, RackDouble}
+    type ModuleType := {ModuleI, ModuleII, ModuleIII, ModuleIV, ModuleV}
+    type ElementType := {ElementA, ElementB, ElementC, ElementD}
+    module14: (Module) → 𝔹
+    typeOfR: (Rack) → RackType
+    typeOfM: (Module) → ModuleType
+    typeOfE: (Element) → ElementType
+    rackOfF: (Frame) → Rack
+    frameOfM: (Module) → Frame
+    elementOfM: (module14) → Element
+    maxRack: () → ℤ
+    maxFrame: () → ℤ
+    maxModule: () → ℤ
+    maxElement: () → ℤ
+    mulConfigObject: (ConfigObject) → ℤ
+    type TypeConfigObject := {Rack__, Frame__, Module__, Element__}
+    typeConfigObject : ConfigObject -> TypeConfigObject
+}
+theory T:V { 
+    [∀ r ∈ Rack: typeOfR(r) = RackSingle ⇒ #{f ∈ Frame : rackOfF(f) = r} = 4]
+      ∀ r ∈ Rack: typeOfR(r) = RackSingle ⇒ sum(lambda f ∈ Frame : if rackOfF(f) = r then mulConfigObject(f) else 0) = 4 ⨯ mulConfigObject(r).
+    [∀ r ∈ Rack: typeOfR(r) = RackDouble ⇒ #{f ∈ Frame : rackOfF(f) = r} = 8]
+      ∀ r ∈ Rack: typeOfR(r) = RackDouble ⇒ sum(lambda f ∈ Frame : if rackOfF(f) = r then mulConfigObject(f) else 0) = 8 ⨯ mulConfigObject(r).
+    [∀ f ∈ Frame: #{m ∈ Module : frameOfM(m) = f} ≤ 5]
+      ∀ f ∈ Frame: sum(lambda m ∈ Module : if frameOfM(m) = f then mulConfigObject(m) else 0) ≤ 5 ⨯ mulConfigObject(f).
+    [∀ f ∈ Frame: (∃ m2 ∈ Module: frameOfM(m2) = f ∧ typeOfM(m2) = ModuleII) ⇔ #{m5 ∈ Module : frameOfM(m5) = f ∧ typeOfM(m5) = ModuleV} = 1]
+      ∀ f ∈ Frame: (∃ m2 ∈ Module: frameOfM(m2) = f ∧ typeOfM(m2) = ModuleII) ⇔ sum(lambda m5 ∈ Module : if frameOfM(m5) = f ∧ typeOfM(m5) = ModuleV then mulConfigObject(m5) else 0) = 1 ⨯ mulConfigObject(f).
+    [∀ f ∈ Frame: (∃ m2 ∈ Module: frameOfM(m2) = f ∧ typeOfM(m2) = ModuleV) ⇒ (∃ m2 ∈ Module: frameOfM(m2) = f ∧ typeOfM(m2) = ModuleII)]
+      ∀ f ∈ Frame: (∃ m2 ∈ Module: frameOfM(m2) = f ∧ typeOfM(m2) = ModuleV) ⇒ (∃ m2 ∈ Module: frameOfM(m2) = f ∧ typeOfM(m2) = ModuleII).
+    [∀ e ∈ Element: typeOfE(e) = ElementA ⇒ #{m ∈ Module : elementOfM(m) = e ∧ typeOfM(m) = ModuleI} = 1]
+      ∀ e ∈ Element: typeOfE(e) = ElementA ⇒ sum(lambda m ∈ Module : if elementOfM(m) = e ∧ typeOfM(m) = ModuleI then mulConfigObject(m) else 0) = 1 ⨯ mulConfigObject(e).
+    [∀ e ∈ Element: typeOfE(e) = ElementB ⇒ #{m ∈ Module : elementOfM(m) = e ∧ typeOfM(m) = ModuleII} = 2]
+      ∀ e ∈ Element: typeOfE(e) = ElementB ⇒ sum(lambda m ∈ Module : if elementOfM(m) = e ∧ typeOfM(m) = ModuleII then mulConfigObject(m) else 0) = 2 ⨯ mulConfigObject(e).
+    [∀ e ∈ Element: typeOfE(e) = ElementC ⇒ #{m ∈ Module : elementOfM(m) = e ∧ typeOfM(m) = ModuleIII} = 3]
+      ∀ e ∈ Element: typeOfE(e) = ElementC ⇒ sum(lambda m ∈ Module : if elementOfM(m) = e ∧ typeOfM(m) = ModuleIII then mulConfigObject(m) else 0) = 3 ⨯ mulConfigObject(e).
+    [∀ e ∈ Element: typeOfE(e) = ElementD ⇒ #{m ∈ Module : elementOfM(m) = e ∧ typeOfM(m) = ModuleIV} = 4]
+      ∀ e ∈ Element: typeOfE(e) = ElementD ⇒ sum(lambda m ∈ Module : if elementOfM(m) = e ∧ typeOfM(m) = ModuleIV then mulConfigObject(m) else 0) = 4 ⨯ mulConfigObject(e).
+    [#{e ∈ Element : typeOfE(e) = ElementA} = 4]
+      sum(lambda e ∈ Element : if typeOfE(e) = ElementA then mulConfigObject(e) else 0) = 4.
+    [#{e ∈ Element : typeOfE(e) = ElementB} = 4]
+      sum(lambda e ∈ Element : if typeOfE(e) = ElementB then mulConfigObject(e) else 0) = 4.
+    [#{e ∈ Element : typeOfE(e) = ElementC} = 4]
+      sum(lambda e ∈ Element : if typeOfE(e) = ElementC then mulConfigObject(e) else 0) = 4.
+    [#{e ∈ Element : typeOfE(e) = ElementD} = 4]
+      sum(lambda e ∈ Element : if typeOfE(e) = ElementD then mulConfigObject(e) else 0) = 4.
+    ∀ mulConfigObject0_ ∈ ConfigObject: 0 ≤ mulConfigObject(mulConfigObject0_).
+    ∀ f ∈ Frame: ∃ n__5sldkqsdf ∈ ℤ: mulConfigObject(f) = n__5sldkqsdf ⨯ mulConfigObject(rackOfF(f)).
+    ∀ m ∈ Module: ∃ n__5sldkqsdf ∈ ℤ: mulConfigObject(m) = n__5sldkqsdf ⨯ mulConfigObject(frameOfM(m)).
+    ∀ m ∈ Module: ∃ n__5sldkqsdf ∈ ℤ: mulConfigObject(m) = n__5sldkqsdf ⨯ mulConfigObject(elementOfM(m)).
+    { ∀ module140_ ∈ Module: module14(module140_) ← ¬(typeOfM(module140_) = ModuleV).
+    }
+    { !x in ConfigObject: typeConfigObject(x)=Rack__ <- Rack(x)& 0 < mulConfigObject(x).
+      !x in ConfigObject: typeConfigObject(x)=Frame__ <- Frame(x)& 0 < mulConfigObject(x).
+      !x in ConfigObject: typeConfigObject(x)=Module__ <- Module(x)& 0 < mulConfigObject(x).
+      !x in ConfigObject: typeConfigObject(x)=Element__ <- Element(x)& 0 < mulConfigObject(x).
+    }
+    {
+      !x in ConfigObject: typeConfigObject(x)=Rack__ <- 1 =< x < maxRack().
+      !x in ConfigObject: typeConfigObject(x)=Frame__ <- maxRack() =< x < maxFrame().
+      !x in ConfigObject: typeConfigObject(x)=Module__ <- maxFrame() =< x < maxModule().
+      !x in ConfigObject: typeConfigObject(x)=Element__ <- maxModule() =< x < maxElement().
+    }
+
+    
+}
+
+procedure main() {
+    logging.getLogger().setLevel(logging.INFO)
+    interp, sol = Theory(T).generate(timeout_seconds=0, unsat_seconds=5)
+    pretty_print(sol)
+    print(duration("Expansion"))
+    print("-------------------")
+    print(Theory(T).expand_lifting(sol))
+    print("-------------------")
+}
+        

@@ -1,0 +1,37 @@
+vocabulary V { 
+    type ConfigObject 
+    El: (ConfigObject) → 𝔹
+    UNUSED: (ConfigObject) → 𝔹
+    List_content: (El) → 𝔹
+    list_size: () → ℤ
+    c: () → El
+    var e ∈ El
+    maxEl: () → ℤ
+    maxUNUSED: () → ℤ
+    type TypeConfigObject := {El__, UNUSED__}
+    typeConfigObject : ConfigObject -> TypeConfigObject
+}
+theory T:V { 
+    ¬((list_size() = #{e : List_content(e)} ⇒ (list_size() + 1 = #{e : List_content(e) ∨ e = c()}))).
+    
+    { !x in ConfigObject: typeConfigObject(x)=El__ <- El(x).
+      !x in ConfigObject: typeConfigObject(x)=UNUSED__ <- UNUSED(x).
+    }
+    {
+      !x in ConfigObject: typeConfigObject(x)=El__ <- 1 =< x < maxEl().
+      !x in ConfigObject: typeConfigObject(x)=UNUSED__ <- maxEl() =< x < maxUNUSED().
+    }
+
+    
+}
+
+procedure main() {
+    logging.getLogger().setLevel(logging.INFO)
+    interp, sol = Theory(T).generate(factor=1.5, timeout_seconds=0)
+    pretty_print(sol)
+    print(duration("Expansion"))
+    print("-------------------")
+    print(Theory(T).expand_lifting(sol))
+    print("-------------------")
+}
+        

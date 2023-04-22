@@ -1,0 +1,47 @@
+vocabulary V { 
+    type ConfigObject 
+    El: (ConfigObject) → 𝔹
+    UNUSED: (ConfigObject) → 𝔹
+    l1: (El) → 𝔹
+    this: (El) → 𝔹
+    Object_alloc: (El) → 𝔹
+    Object_alloc_16: (El) → 𝔹
+    Object_alloc_30: (El) → 𝔹
+    Object_alloc_45: (El) → 𝔹
+    Object_alloc74: (El) → 𝔹
+    Object_alloc_60: (El) → 𝔹
+    List_content: (El) → 𝔹
+    List_content_73: (El) → 𝔹
+    S1_42: (El) → 𝔹
+    S2_41: (El) → 𝔹
+    tmp_3_57: () → El
+    var e ∈ El
+    maxEl: () → ℤ
+    maxUNUSED: () → ℤ
+    type TypeConfigObject := {El__, UNUSED__}
+    typeConfigObject : ConfigObject -> TypeConfigObject
+}
+theory T:V { 
+    ¬(((∃ e: l1(e)) ∧ (∃ e: this(e)) ∧ (∃ e: ¬((l1(e) ⇔ this(e)))) ∧ Object_alloc(tmp_3_57()) ∧ (∀ e: Object_alloc_45(e) ⇔ Object_alloc_60(e)) ∧ (∀ e: Object_alloc_45(e) ⇔ Object_alloc(e)) ∧ S1_42(tmp_3_57()) ∧ (∀ e: S2_41(e) ⇔ S1_42(e) ∧ e ≠ tmp_3_57()) ∧ #{e : Object_alloc_30(e) ∧ ¬(Object_alloc_45(e))} ≤ 1 ∧ (∀ e: Object_alloc_45(e) ⇒ Object_alloc_30(e)) ∧ #{e : Object_alloc_30(e) ∧ ¬(Object_alloc(e))} ≤ 1 ∧ (∀ e: Object_alloc_30(e) ⇒ Object_alloc_16(e)) ∧ #{e : Object_alloc_16(e) ∧ ¬(Object_alloc_30(e))} ≤ #{e : S2_41(e)} ⇒ #{e : Object_alloc_16(e) ∧ ¬(Object_alloc(e))} < #{e : S1_42(e)})).
+    
+    { !x in ConfigObject: typeConfigObject(x)=El__ <- El(x).
+      !x in ConfigObject: typeConfigObject(x)=UNUSED__ <- UNUSED(x).
+    }
+    {
+      !x in ConfigObject: typeConfigObject(x)=El__ <- 1 =< x < maxEl().
+      !x in ConfigObject: typeConfigObject(x)=UNUSED__ <- maxEl() =< x < maxUNUSED().
+    }
+
+    
+}
+
+procedure main() {
+    logging.getLogger().setLevel(logging.INFO)
+    interp, sol = Theory(T).generate(factor=1.5, timeout_seconds=0)
+    pretty_print(sol)
+    print(duration("Expansion"))
+    print("-------------------")
+    print(Theory(T).expand_lifting(sol))
+    print("-------------------")
+}
+        

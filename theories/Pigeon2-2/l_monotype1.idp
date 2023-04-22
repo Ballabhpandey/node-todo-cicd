@@ -1,0 +1,43 @@
+vocabulary V { 
+    type ConfigObject 
+    Pigeon: (ConfigObject) → 𝔹
+    Hole: (ConfigObject) → 𝔹
+    inHole: (Pigeon⨯Hole) → 𝔹
+    var p ∈ Pigeon
+    var h ∈ Hole
+    maxPigeon: () → ℤ
+    maxHole: () → ℤ
+    mulConfigObject: (ConfigObject) → ℤ
+    type TypeConfigObject := {Pigeon__, Hole__}
+    typeConfigObject : ConfigObject -> TypeConfigObject
+}
+theory T:V { 
+    [#{p : true} = 3]
+      sum(lambda p ∈ Pigeon : mulConfigObject(p)) = 3.
+    [∀ h: #{p : inHole(p, h)} = 2]
+      ∀ h ∈ Hole: sum(lambda p ∈ Pigeon : if inHole(p, h) then mulConfigObject(p) else 0) = 2.
+    [∀ p: #{h : inHole(p, h)} = 2]
+      ∀ p ∈ Pigeon: sum(lambda h ∈ Hole : if inHole(p, h) then mulConfigObject(h) else 0) = 2.
+    ∀ mulConfigObject0_ ∈ ConfigObject: 0 ≤ mulConfigObject(mulConfigObject0_).
+    
+    { !x in ConfigObject: typeConfigObject(x)=Pigeon__ <- Pigeon(x)& 0 < mulConfigObject(x).
+      !x in ConfigObject: typeConfigObject(x)=Hole__ <- Hole(x)& 0 < mulConfigObject(x).
+    }
+    {
+      !x in ConfigObject: typeConfigObject(x)=Pigeon__ <- 1 =< x < maxPigeon().
+      !x in ConfigObject: typeConfigObject(x)=Hole__ <- maxPigeon() =< x < maxHole().
+    }
+∀ p ∈ Pigeon, h ∈ Hole: ∀ n, m ∈ Int: 0 < n < mulConfigObject(p) ∧ 0 < m < mulConfigObject(h) ⇒ mulConfigObject(p) * m ≠ mulConfigObject(h) * n.
+    
+}
+
+procedure main() {
+    logging.getLogger().setLevel(logging.INFO)
+    interp, sol = Theory(T).generate(timeout_seconds=0)
+    pretty_print(sol)
+    print(duration("Expansion"))
+    print("-------------------")
+    print(Theory(T).expand_lifting(sol))
+    print("-------------------")
+}
+        

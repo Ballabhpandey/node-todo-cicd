@@ -1,0 +1,19 @@
+vocabulary V {
+    type Pigeon
+    type Hole
+
+    inHole: Pigeon * Hole -> Bool
+
+    var p in Pigeon
+    var h in Hole
+}
+
+theory T:V {
+    #{p:true} = $n$.
+    !h: #{p: inHole(p, h)} = 2.
+    !p: #{h: inHole(p, h)} = 2.
+}
+
+structure S:V {
+
+}

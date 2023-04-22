@@ -1,0 +1,63 @@
+vocabulary V { 
+    type Thing_T 
+    Thing: (Thing_T) → 𝔹
+    type Cabinet_T 
+    Cabinet: (Cabinet_T) → 𝔹
+    type Room_T 
+    Room: (Room_T) → 𝔹
+    type Person 
+    ownerOfT: (Thing) → Person
+    cabinetOfT: (Thing) → Cabinet
+    roomOfC: (Cabinet) → Room
+    ownerOfR: (Room) → Person
+    highC: (Cabinet) → 𝔹
+    longT: (Thing) → 𝔹
+    var p ∈ Person
+    var t ∈ Thing
+    var c ∈ Cabinet
+    var r ∈ Room
+    mulThing_T: (Thing_T) → ℤ
+    mulCabinet_T: (Cabinet_T) → ℤ
+    mulRoom_T: (Room_T) → ℤ
+}
+theory T:V { 
+    [∀ c: #{t : cabinetOfT(t) = c} ≤ 5]
+      ∀ c ∈ Cabinet: sum(lambda t ∈ Thing : if cabinetOfT(t) = c then mulThing_T(t) else 0) ≤ 5 ⨯ mulCabinet_T(c).
+    [∀ r: #{c : roomOfC(c) = r} ≤ 4]
+      ∀ r ∈ Room: sum(lambda c ∈ Cabinet : if roomOfC(c) = r then mulCabinet_T(c) else 0) ≤ 4 ⨯ mulRoom_T(r).
+    [∀ t: ownerOfT(t) = ownerOfR(roomOfC(cabinetOfT(t)))]
+      ∀ t ∈ Thing: ownerOfT(t) = ownerOfR(roomOfC(cabinetOfT(t))).
+    [∀ t: longT(t) ⇒ highC(cabinetOfT(t))]
+      ∀ t ∈ Thing: longT(t) ⇒ highC(cabinetOfT(t)).
+    [∀ r: #{c : ¬(highC(c))} + 2 ⨯ #{c : highC(c)} ≤ 4]
+      ∀ r ∈ Room: sum(lambda c ∈ Cabinet : if ¬(highC(c)) then mulCabinet_T(c) else 0) + 2 ⨯ sum(lambda c ∈ Cabinet : if highC(c) then mulCabinet_T(c) else 0) ≤ 4.
+    [#{t : ownerOfT(t) = P1} = 5]
+      sum(lambda t ∈ Thing : if ownerOfT(t) = P1 then mulThing_T(t) else 0) = 5.
+    [#{t : ownerOfT(t) = P2} = 1]
+      sum(lambda t ∈ Thing : if ownerOfT(t) = P2 then mulThing_T(t) else 0) = 1.
+    [#{t : ownerOfT(t) = P1 ∧ longT(t)} = 1]
+      sum(lambda t ∈ Thing : if ownerOfT(t) = P1 ∧ longT(t) then mulThing_T(t) else 0) = 1.
+    [#{t : ownerOfT(t) = P2 ∧ longT(t)} = 1]
+      sum(lambda t ∈ Thing : if ownerOfT(t) = P2 ∧ longT(t) then mulThing_T(t) else 0) = 1.
+    ∀ mulThing_T0_ ∈ Thing_T: 0 ≤ mulThing_T(mulThing_T0_).
+    ∀ mulCabinet_T0_ ∈ Cabinet_T: 0 ≤ mulCabinet_T(mulCabinet_T0_).
+    ∀ mulRoom_T0_ ∈ Room_T: 0 ≤ mulRoom_T(mulRoom_T0_).
+    ∀ t ∈ Thing: ∃ n__5sldkqsdf ∈ ℤ: mulThing_T(t) = n__5sldkqsdf ⨯ mulCabinet_T(cabinetOfT(t)).
+    ∀ c ∈ Cabinet: ∃ n__5sldkqsdf ∈ ℤ: mulCabinet_T(c) = n__5sldkqsdf ⨯ mulRoom_T(roomOfC(c)).
+    
+    ! x in Thing_T: Thing(x) <=> 0 < mulThing_T(x).
+    ! x in Cabinet_T: Cabinet(x) <=> 0 < mulCabinet_T(x).
+    ! x in Room_T: Room(x) <=> 0 < mulRoom_T(x).
+    Person ≜ {P1, P2}.
+}
+
+procedure main() {
+    logging.getLogger().setLevel(logging.INFO)
+    interp, sol = Theory(T).generate(factor=1.5, timeout_seconds=0, unsat_seconds=5)
+    pretty_print(sol)
+    print(duration("Expansion"))
+    print("-------------------")
+    print(Theory(T).expand_lifting(sol))
+    print("-------------------")
+}
+        

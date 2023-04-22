@@ -1,0 +1,17 @@
+vocabulary V {
+    type El
+    C, C1, alloc0, alloc1, alloc2 : El → 𝔹
+    c: () -> El
+    var e in El
+}
+
+theory T:V {
+    ~( C(c()) & (!e: C1(e) <=> C(e) & e~= c())
+       & #{e: alloc1(e) & ~alloc0(e)} =< 1
+       & #{e: alloc2(e) & ~alloc1(e)} =< #{e: C1(e)}
+       => #{e: alloc2(e) & ~alloc0(e)} =< #{e: C(e)}
+    ).
+}
+
+structure S:V {
+}

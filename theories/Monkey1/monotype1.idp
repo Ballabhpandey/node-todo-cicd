@@ -1,0 +1,46 @@
+vocabulary V { 
+    type ConfigObject 
+    Monkey: (ConfigObject) → 𝔹
+    Banana: (ConfigObject) → 𝔹
+    Tree: (ConfigObject) → 𝔹
+    ownerOfB: (Banana) → Monkey
+    treeOfM: (Monkey) → Tree
+    partnerOfM: (Monkey) → Monkey
+    var m ∈ Monkey
+    var b ∈ Banana
+    var t ∈ Tree
+    maxMonkey: () → ℤ
+    maxBanana: () → ℤ
+    maxTree: () → ℤ
+    type TypeConfigObject := {Monkey__, Banana__, Tree__}
+    typeConfigObject : ConfigObject -> TypeConfigObject
+}
+theory T:V { 
+    ∀ m: 2 ≤ #{b : ownerOfB(b) = m}.
+    ∀ t: #{m : treeOfM(m) = t} = 3.
+    ∀ m: partnerOfM(m) ≠ m ∧ partnerOfM(partnerOfM(m)) = m.
+    ∃ t: true.
+    
+    { !x in ConfigObject: typeConfigObject(x)=Monkey__ <- Monkey(x).
+      !x in ConfigObject: typeConfigObject(x)=Banana__ <- Banana(x).
+      !x in ConfigObject: typeConfigObject(x)=Tree__ <- Tree(x).
+    }
+    {
+      !x in ConfigObject: typeConfigObject(x)=Monkey__ <- 1 =< x < maxMonkey().
+      !x in ConfigObject: typeConfigObject(x)=Banana__ <- maxMonkey() =< x < maxBanana().
+      !x in ConfigObject: typeConfigObject(x)=Tree__ <- maxBanana() =< x < maxTree().
+    }
+
+    
+}
+
+procedure main() {
+    logging.getLogger().setLevel(logging.INFO)
+    interp, sol = Theory(T).generate(timeout_seconds=0, unsat_seconds=5)
+    pretty_print(sol)
+    print(duration("Expansion"))
+    print("-------------------")
+    print(Theory(T).expand_lifting(sol))
+    print("-------------------")
+}
+        

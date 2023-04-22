@@ -1,0 +1,38 @@
+vocabulary V { 
+    type ConfigObject 
+    Pigeon: (ConfigObject) → 𝔹
+    Hole: (ConfigObject) → 𝔹
+    inHole: (Pigeon⨯Hole) → 𝔹
+    var p ∈ Pigeon
+    var h ∈ Hole
+    maxPigeon: () → ℤ
+    maxHole: () → ℤ
+    type TypeConfigObject := {Pigeon__, Hole__}
+    typeConfigObject : ConfigObject -> TypeConfigObject
+}
+theory T:V { 
+    #{p : true} = 4.
+    ∀ h: #{p : inHole(p, h)} = 2.
+    ∀ p: #{h : inHole(p, h)} = 2.
+    
+    { !x in ConfigObject: typeConfigObject(x)=Pigeon__ <- Pigeon(x).
+      !x in ConfigObject: typeConfigObject(x)=Hole__ <- Hole(x).
+    }
+    {
+      !x in ConfigObject: typeConfigObject(x)=Pigeon__ <- 1 =< x < maxPigeon().
+      !x in ConfigObject: typeConfigObject(x)=Hole__ <- maxPigeon() =< x < maxHole().
+    }
+
+    
+}
+
+procedure main() {
+    logging.getLogger().setLevel(logging.INFO)
+    interp, sol = Theory(T).generate(timeout_seconds=0)
+    pretty_print(sol)
+    print(duration("Expansion"))
+    print("-------------------")
+    print(Theory(T).expand_lifting(sol))
+    print("-------------------")
+}
+        

@@ -1,0 +1,32 @@
+vocabulary V { 
+    type El_T 
+    El: (El_T) → 𝔹
+    A: (El) → 𝔹
+    B: (El) → 𝔹
+    C: (El) → 𝔹
+    var e ∈ El
+    mulEl_T: (El_T) → ℤ
+}
+theory T:V { 
+    [#{e : A(e)} > 1]
+      sum(lambda e ∈ El : if A(e) then mulEl_T(e) else 0) > 1.
+    [∀ e: A(e) ⇒ B(e)]
+      ∀ e ∈ El: A(e) ⇒ B(e).
+    [#{e : B(e) ∧ C(e)} ≤ 2]
+      sum(lambda e ∈ El : if B(e) ∧ C(e) then mulEl_T(e) else 0) ≤ 2.
+    ∀ mulEl_T0_ ∈ El_T: 0 ≤ mulEl_T(mulEl_T0_).
+    
+    ! x in El_T: El(x) <=> 0 < mulEl_T(x).
+    
+}
+
+procedure main() {
+    logging.getLogger().setLevel(logging.INFO)
+    interp, sol = Theory(T).generate(timeout_seconds=0)
+    pretty_print(sol)
+    print(duration("Expansion"))
+    print("-------------------")
+    print(Theory(T).expand_lifting(sol))
+    print("-------------------")
+}
+        

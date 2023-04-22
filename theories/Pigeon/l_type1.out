@@ -1,0 +1,5 @@
+Pigeon := {P1}.
+Hole := {H1}.
+holeOf := {P1 -> H1}.
+mulPigeon_T := {P1 -> 20, P2 -> 0}.
+mulHole_T := {H1 -> 20}.

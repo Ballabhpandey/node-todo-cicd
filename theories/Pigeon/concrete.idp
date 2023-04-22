@@ -1,0 +1,18 @@
+vocabulary V {
+    type Pigeon
+    type Hole
+
+    holeOf: Pigeon -> Hole
+
+    var p in Pigeon
+    var h in Hole
+}
+
+theory T:V {
+    #{p: true}=$n$.
+    !h: #{p: holeOf(p)=h}=1.
+}
+
+structure S:V {
+
+}

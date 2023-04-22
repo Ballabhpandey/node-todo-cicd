@@ -1,0 +1,49 @@
+vocabulary V { 
+    type Monkey_T 
+    Monkey: (Monkey_T) → 𝔹
+    type Banana_T 
+    Banana: (Banana_T) → 𝔹
+    type Tree_T 
+    Tree: (Tree_T) → 𝔹
+    ownerOfB: (Banana) → Monkey
+    treeOfM: (Monkey) → Tree
+    partnerOfM: (Monkey) → Monkey
+    var m ∈ Monkey
+    var b ∈ Banana
+    var t ∈ Tree
+    mulMonkey_T: (Monkey_T) → ℤ
+    mulBanana_T: (Banana_T) → ℤ
+    mulTree_T: (Tree_T) → ℤ
+}
+theory T:V { 
+    [∀ m: 2 ≤ #{b : ownerOfB(b) = m}]
+      ∀ m ∈ Monkey: 2 ⨯ mulMonkey_T(m) ≤ sum(lambda b ∈ Banana : if ownerOfB(b) = m then mulBanana_T(b) else 0).
+    [∀ t: #{m : treeOfM(m) = t} = 3]
+      ∀ t ∈ Tree: sum(lambda m ∈ Monkey : if treeOfM(m) = t then mulMonkey_T(m) else 0) = 3 ⨯ mulTree_T(t).
+    [∀ m: partnerOfM(m) ≠ m ∧ partnerOfM(partnerOfM(m)) = m]
+      ∀ m ∈ Monkey: ¬(partnerOfM(m) = m) ∧ partnerOfM(partnerOfM(m)) = m.
+    [#{t : true} = 4]
+      sum(lambda t ∈ Tree : mulTree_T(t)) = 4.
+    ∀ mulMonkey_T0_ ∈ Monkey_T: 0 ≤ mulMonkey_T(mulMonkey_T0_).
+    ∀ mulBanana_T0_ ∈ Banana_T: 0 ≤ mulBanana_T(mulBanana_T0_).
+    ∀ mulTree_T0_ ∈ Tree_T: 0 ≤ mulTree_T(mulTree_T0_).
+    ∀ b ∈ Banana: ∃ n__5sldkqsdf ∈ ℤ: mulBanana_T(b) = n__5sldkqsdf ⨯ mulMonkey_T(ownerOfB(b)).
+    ∀ m ∈ Monkey: ∃ n__5sldkqsdf ∈ ℤ: mulMonkey_T(m) = n__5sldkqsdf ⨯ mulTree_T(treeOfM(m)).
+    ∀ partnerOfM0_ ∈ Monkey: ∃ n__5sldkqsdf ∈ ℤ: mulMonkey_T(partnerOfM0_) = n__5sldkqsdf ⨯ mulMonkey_T(partnerOfM(partnerOfM0_)).
+    
+    ! x in Monkey_T: Monkey(x) <=> 0 < mulMonkey_T(x).
+    ! x in Banana_T: Banana(x) <=> 0 < mulBanana_T(x).
+    ! x in Tree_T: Tree(x) <=> 0 < mulTree_T(x).
+    
+}
+
+procedure main() {
+    logging.getLogger().setLevel(logging.INFO)
+    interp, sol = Theory(T).generate(factor=1.5, timeout_seconds=0, unsat_seconds=5)
+    pretty_print(sol)
+    print(duration("Expansion"))
+    print("-------------------")
+    print(Theory(T).expand_lifting(sol))
+    print("-------------------")
+}
+        

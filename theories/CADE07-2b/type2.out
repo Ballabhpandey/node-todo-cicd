@@ -1,0 +1,14 @@
+El := {1}.
+List_content := {1}.
+list_size := 1.
+c := 1.
+
+0.029 Expansion
+-------------------
+El_T := {}.
+El := {1}.
+List_content := {1}.
+list_size := {-> 1}.
+c := {-> 1}.
+-------------------
+Elapsed time: 0.04796266555786133 seconds

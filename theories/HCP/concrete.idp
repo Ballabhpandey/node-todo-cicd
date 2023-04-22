@@ -1,0 +1,38 @@
+vocabulary V {
+    type Person
+    type Thing
+    type Cabinet
+    type Room
+
+    ownerOfT: Thing -> Person
+    cabinetOfT: Thing -> Cabinet
+    roomOfC: Cabinet -> Room
+    ownerOfR: Room -> Person
+
+    var p in Person
+    var t in Thing
+    var c in Cabinet
+    var r in Room
+}
+
+theory T:V {
+    [a cabinet can contain at most 5 things]
+    !c: #{t: cabinetOfT(t)=c} =< 5.
+
+    [a room can contain at most 4 cabinets]
+    !r: #{c: roomOfC(c)=r} =< 4.
+
+    [a room may only contain carbinets storing things of the owner of the room]
+    !t: ownerOfT(t) = ownerOfR(roomOfC(cabinetOfT(t))).
+}
+
+theory S:V {
+    // there are 2 persons
+    Person := {P1, P2}.
+
+    [P1 owns 5 things]
+    #{t: ownerOfT(t)=P1} = 5.
+
+    [P2 owns 1 thing]
+    #{t: ownerOfT(t)=P2} = 1.
+}

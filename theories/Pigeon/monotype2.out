@@ -1,0 +1,8 @@
+Pigeon := {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20}.
+Hole := {21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40}.
+UNUSED := {41, 42}.
+holeOf := {1 -> 37, 2 -> 29, 3 -> 34, 4 -> 22, 5 -> 25, 6 -> 21, 7 -> 40, 8 -> 23, 9 -> 27, 10 -> 26, 11 -> 32, 12 -> 35, 13 -> 30, 14 -> 24, 15 -> 31, 16 -> 38, 17 -> 36, 18 -> 28, 19 -> 39, 20 -> 33}.
+maxPigeon := 21.
+maxHole := 41.
+maxUNUSED := 43.
+typeConfigObject := {1 -> Pigeon__, 2 -> Pigeon__, 3 -> Pigeon__, 4 -> Pigeon__, 5 -> Pigeon__, 6 -> Pigeon__, 7 -> Pigeon__, 8 -> Pigeon__, 9 -> Pigeon__, 10 -> Pigeon__, 11 -> Pigeon__, 12 -> Pigeon__, 13 -> Pigeon__, 14 -> Pigeon__, 15 -> Pigeon__, 16 -> Pigeon__, 17 -> Pigeon__, 18 -> Pigeon__, 19 -> Pigeon__, 20 -> Pigeon__, 21 -> Hole__, 22 -> Hole__, 23 -> Hole__, 24 -> Hole__, 25 -> Hole__, 26 -> Hole__, 27 -> Hole__, 28 -> Hole__, 29 -> Hole__, 30 -> Hole__, 31 -> Hole__, 32 -> Hole__, 33 -> Hole__, 34 -> Hole__, 35 -> Hole__, 36 -> Hole__, 37 -> Hole__, 38 -> Hole__, 39 -> Hole__, 40 -> Hole__, 41 -> UNUSED__, 42 -> UNUSED__}.

@@ -1,0 +1,35 @@
+Rack := {1}.
+Frame := {2, 3}.
+Module := {4}.
+Element := {5}.
+module14 := {4}.
+typeOfR := {1 -> RackSingle}.
+typeOfM := {4 -> ModuleI}.
+typeOfE := {5 -> ElementA}.
+rackOfF := {2 -> 1, 3 -> 1}.
+frameOfM := {4 -> 3}.
+elementOfM := {4 -> 5}.
+maxRack := 2.
+maxFrame := 4.
+maxModule := 5.
+maxElement := 6.
+mulConfigObject := {1 -> 1, 2 -> 3, 3 -> 1, 4 -> 1, 5 -> 1}.
+typeConfigObject := {1 -> Rack__, 2 -> Frame__, 3 -> Frame__, 4 -> Module__, 5 -> Element__}.
+
+1.049 Expansion
+-------------------
+ConfigObject := {1, 2, 3, 4, 5, 6, 7}.
+Rack := {1}.
+Frame := {2, 3, 4, 5}.
+Module := {6}.
+Element := {7}.
+module14 := {6}.
+typeOfR := {1 -> RackSingle}.
+typeOfM := {6 -> ModuleI}.
+typeOfE := {7 -> ElementA}.
+rackOfF := {2 -> 1, 3 -> 1, 4 -> 1, 5 -> 1}.
+frameOfM := {6 -> 5}.
+elementOfM := {6 -> 7}.
+typeConfigObject := {1 -> Rack__, 2 -> Frame__, 3 -> Frame__, 4 -> Frame__, 5 -> Frame__, 6 -> Module__, 7 -> Element__}.
+-------------------
+Elapsed time: 1.1669809818267822 seconds

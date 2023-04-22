@@ -1,0 +1,34 @@
+vocabulary V { 
+    type Monkey_T 
+    Monkey: (Monkey_T) → 𝔹
+    type Banana_T 
+    Banana: (Banana_T) → 𝔹
+    type Tree_T 
+    Tree: (Tree_T) → 𝔹
+    ownerOfB: (Banana) → Monkey
+    treeOfM: (Monkey) → Tree
+    partnerOfM: (Monkey) → Monkey
+    var m ∈ Monkey
+    var b ∈ Banana
+    var t ∈ Tree
+}
+theory T:V { 
+    ∀ m: 2 ≤ #{b : ownerOfB(b) = m}.
+    ∀ t: #{m : treeOfM(m) = t} = 3.
+    ∀ m: partnerOfM(m) ≠ m ∧ partnerOfM(partnerOfM(m)) = m.
+    ∃ t: true.
+    
+    
+    
+}
+
+procedure main() {
+    logging.getLogger().setLevel(logging.INFO)
+    interp, sol = Theory(T).generate(timeout_seconds=0, unsat_seconds=5)
+    pretty_print(sol)
+    print(duration("Expansion"))
+    print("-------------------")
+    print(Theory(T).expand_lifting(sol))
+    print("-------------------")
+}
+        

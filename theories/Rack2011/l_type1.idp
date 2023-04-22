@@ -1,0 +1,72 @@
+vocabulary V { 
+    type Section_T 
+    Section: (Section_T) → 𝔹
+    type Element_T 
+    Element: (Element_T) → 𝔹
+    type Module_T 
+    Module: (Module_T) → 𝔹
+    type slot_T 
+    slot: (slot_T) → 𝔹
+    type Rack_T 
+    Rack: (Rack_T) → 𝔹
+    SofE: (Element) → Section
+    EofM: (Module) → Element
+    s_has_Module: (slot) → 𝔹
+    Mofs: (slot) → Module
+    Rofs: (slot) → Rack
+    SofR: (Rack) → Section
+    var S ∈ Section
+    var E ∈ Element
+    var M ∈ Module
+    var s ∈ slot
+    var R ∈ Rack
+    mulSection_T: (Section_T) → ℤ
+    mulElement_T: (Element_T) → ℤ
+    mulModule_T: (Module_T) → ℤ
+    mulslot_T: (slot_T) → ℤ
+    mulRack_T: (Rack_T) → ℤ
+}
+theory T:V { 
+    [1 ≤ #{S : true}]
+      1 ≤ sum(lambda S ∈ Section : mulSection_T(S)).
+    [3 ≤ #{E : true}]
+      3 ≤ sum(lambda E ∈ Element : mulElement_T(E)).
+    [∀ S: 1 ≤ #{E : SofE(E) = S} ≤ 20]
+      ∀ S ∈ Section: 1 ⨯ mulSection_T(S) ≤ sum(lambda E ∈ Element : if SofE(E) = S then mulElement_T(E) else 0) ≤ 20 ⨯ mulSection_T(S).
+    [∀ E: 1 ≤ #{M : EofM(M) = E} ≤ 8]
+      ∀ E ∈ Element: 1 ⨯ mulElement_T(E) ≤ sum(lambda M ∈ Module : if EofM(M) = E then mulModule_T(M) else 0) ≤ 8 ⨯ mulElement_T(E).
+    [∀ M: #{s : Mofs(s) = M} = 2]
+      ∀ M ∈ Module: sum(lambda s ∈ slot : if Mofs(s) = M then mulslot_T(s) else 0) = 2 ⨯ mulModule_T(M).
+    [∀ R: #{s : Rofs(s) = R} = 5]
+      ∀ R ∈ Rack: sum(lambda s ∈ slot : if Rofs(s) = R then mulslot_T(s) else 0) = 5 ⨯ mulRack_T(R).
+    [∀ S: 1 ≤ #{R : SofR(R) = S} ≤ 2]
+      ∀ S ∈ Section: 1 ⨯ mulSection_T(S) ≤ sum(lambda R ∈ Rack : if SofR(R) = S then mulRack_T(R) else 0) ≤ 2 ⨯ mulSection_T(S).
+    ∀ mulSection_T0_ ∈ Section_T: 0 ≤ mulSection_T(mulSection_T0_).
+    ∀ mulElement_T0_ ∈ Element_T: 0 ≤ mulElement_T(mulElement_T0_).
+    ∀ mulModule_T0_ ∈ Module_T: 0 ≤ mulModule_T(mulModule_T0_).
+    ∀ mulslot_T0_ ∈ slot_T: 0 ≤ mulslot_T(mulslot_T0_).
+    ∀ mulRack_T0_ ∈ Rack_T: 0 ≤ mulRack_T(mulRack_T0_).
+    ∀ E ∈ Element: ∃ n__5sldkqsdf ∈ ℤ: mulElement_T(E) = n__5sldkqsdf ⨯ mulSection_T(SofE(E)).
+    ∀ M ∈ Module: ∃ n__5sldkqsdf ∈ ℤ: mulModule_T(M) = n__5sldkqsdf ⨯ mulElement_T(EofM(M)).
+    ∀ s ∈ slot: ∃ n__5sldkqsdf ∈ ℤ: mulslot_T(s) = n__5sldkqsdf ⨯ mulModule_T(Mofs(s)).
+    ∀ s ∈ slot: ∃ n__5sldkqsdf ∈ ℤ: mulslot_T(s) = n__5sldkqsdf ⨯ mulRack_T(Rofs(s)).
+    ∀ R ∈ Rack: ∃ n__5sldkqsdf ∈ ℤ: mulRack_T(R) = n__5sldkqsdf ⨯ mulSection_T(SofR(R)).
+    
+    ! x in Section_T: Section(x) <=> 0 < mulSection_T(x).
+    ! x in Element_T: Element(x) <=> 0 < mulElement_T(x).
+    ! x in Module_T: Module(x) <=> 0 < mulModule_T(x).
+    ! x in slot_T: slot(x) <=> 0 < mulslot_T(x).
+    ! x in Rack_T: Rack(x) <=> 0 < mulRack_T(x).
+    
+}
+
+procedure main() {
+    logging.getLogger().setLevel(logging.INFO)
+    interp, sol = Theory(T).generate(timeout_seconds=0, unsat_seconds=5)
+    pretty_print(sol)
+    print(duration("Expansion"))
+    print("-------------------")
+    print(Theory(T).expand_lifting(sol))
+    print("-------------------")
+}
+        

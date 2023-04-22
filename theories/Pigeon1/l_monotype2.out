@@ -1,0 +1,20 @@
+Pigeon := {1}.
+Hole := {2}.
+UNUSED := {}.
+holeOf := {1 -> 2}.
+maxPigeon := 2.
+maxHole := 3.
+// maxUNUSED := *.
+mulConfigObject := {1 -> 1, 2 -> 1}.
+typeConfigObject := {1 -> Pigeon__, 2 -> Hole__}.
+
+0.064 Expansion
+-------------------
+ConfigObject := {1, 2}.
+Pigeon := {1}.
+Hole := {2}.
+UNUSED := {}.
+holeOf := {1 -> 2}.
+typeConfigObject := {1 -> Pigeon__, 2 -> Hole__}.
+-------------------
+Elapsed time: 0.10436701774597168 seconds

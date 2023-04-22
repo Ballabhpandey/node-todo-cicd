@@ -1,0 +1,30 @@
+Section := {S6, S8}.
+Element := {E1, E4, E5}.
+Module := {M1, M2, M3, M5, M6}.
+slot := {s1, s4, s5, s6, s7, s8, s9, s11, s12, s13}.
+Rack := {R4, R9}.
+SofE := {E1 -> S8, E4 -> S8, E5 -> S6}.
+EofM := {M1 -> E1, M2 -> E5, M3 -> E1, M5 -> E4, M6 -> E1}.
+Mofs := {s1 -> M5, s4 -> M3, s5 -> M5, s6 -> M3, s7 -> M2, s8 -> M1, s9 -> M6, s11 -> M2, s12 -> M1, s13 -> M6}.
+Rofs := {s1 -> R4, s4 -> R4, s5 -> R9, s6 -> R9, s7 -> R4, s8 -> R9, s9 -> R9, s11 -> R4, s12 -> R9, s13 -> R4}.
+SofR := {R4 -> S6, R9 -> S8}.
+
+8.488 Expansion
+-------------------
+Section_T := {}.
+Element_T := {}.
+Module_T := {}.
+slot_T := {}.
+Rack_T := {}.
+Section := {S6, S8}.
+Element := {E1, E4, E5}.
+Module := {M1, M2, M3, M5, M6}.
+slot := {s1, s4, s5, s6, s7, s8, s9, s11, s12, s13}.
+Rack := {R4, R9}.
+SofE := {E1 -> S8, E4 -> S8, E5 -> S6}.
+EofM := {M1 -> E1, M2 -> E5, M3 -> E1, M5 -> E4, M6 -> E1}.
+Mofs := {s1 -> M5, s4 -> M3, s5 -> M5, s6 -> M3, s7 -> M2, s8 -> M1, s9 -> M6, s11 -> M2, s12 -> M1, s13 -> M6}.
+Rofs := {s1 -> R4, s4 -> R4, s5 -> R9, s6 -> R9, s7 -> R4, s8 -> R9, s9 -> R9, s11 -> R4, s12 -> R9, s13 -> R4}.
+SofR := {R4 -> S6, R9 -> S8}.
+-------------------
+Elapsed time: 8.514854431152344 seconds

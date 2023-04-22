@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "idp-z3-misc Propagation"
+version = "0.1.0"
+description = "Benchmarking of idp-Z3 propagation"
+authors = ["Pierre <pierre.carbonnelle@gmail.com>"]
+license = "GPL 3"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+idp-engine = "^0.8.3"
+PyYAML = "^5.4.1"
+textX="^2.1.0"
+z3-solver = "4.8.12.0"
+pretty-errors = "^1.2.19"
+pyinstrument = "^3.4.2"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

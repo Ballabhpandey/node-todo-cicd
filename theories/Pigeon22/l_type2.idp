@@ -1,0 +1,49 @@
+vocabulary V { 
+    type Pigeon_T 
+    Pigeon: (Pigeon_T) → 𝔹
+    type Hole_T 
+    Hole: (Hole_T) → 𝔹
+    type Relation_T 
+    Relation: (Relation_T) → 𝔹
+    pigeonOfR: (Relation) → Pigeon
+    holeOfR: (Relation) → Hole
+    var p ∈ Pigeon
+    var h ∈ Hole
+    var r ∈ Relation
+    mulPigeon_T: (Pigeon_T) → ℤ
+    mulHole_T: (Hole_T) → ℤ
+    mulRelation_T: (Relation_T) → ℤ
+}
+theory T:V { 
+    [#{p : true} = 1]
+      sum(lambda p ∈ Pigeon : mulPigeon_T(p)) = 1.
+    [∀ p: #{r : pigeonOfR(r) = p} = 2]
+      ∀ p ∈ Pigeon: sum(lambda r ∈ Relation : if pigeonOfR(r) = p then mulRelation_T(r) else 0) = 2 ⨯ mulPigeon_T(p).
+    [∀ h: #{r : holeOfR(r) = h} = 2]
+      ∀ h ∈ Hole: sum(lambda r ∈ Relation : if holeOfR(r) = h then mulRelation_T(r) else 0) = 2 ⨯ mulHole_T(h).
+    [∀ h,p: #{r : pigeonOfR(r) = p ∧ holeOfR(r) = h} ≤ 1]
+      ∀ h ∈ Hole,p ∈ Pigeon: sum(lambda r ∈ Relation : if pigeonOfR(r) = p ∧ holeOfR(r) = h then mulRelation_T(r) else 0) ≤ 1.
+    ∀ mulPigeon_T0_ ∈ Pigeon_T: 0 ≤ mulPigeon_T(mulPigeon_T0_).
+    ∀ mulHole_T0_ ∈ Hole_T: 0 ≤ mulHole_T(mulHole_T0_).
+    ∀ mulRelation_T0_ ∈ Relation_T: 0 ≤ mulRelation_T(mulRelation_T0_).
+    ∀ r ∈ Relation: ∃ n__5sldkqsdf ∈ ℤ: mulRelation_T(r) = n__5sldkqsdf ⨯ mulPigeon_T(pigeonOfR(r)).
+    ∀ r ∈ Relation: ∃ n__5sldkqsdf ∈ ℤ: mulRelation_T(r) = n__5sldkqsdf ⨯ mulHole_T(holeOfR(r)).
+    ∀ p ∈ Pigeon: ∀ h ∈ Hole: ∀ r ∈ Relation: (if 1 < mulRelation_T(r) then 1 else 0) + (if 1 < mulHole_T(h) then 1 else 0) + (if 1 < mulPigeon_T(p) then 1 else 0) ≤ 1.
+    
+    ! x in Pigeon_T: Pigeon(x) <=> 0 < mulPigeon_T(x).
+    ! x in Hole_T: Hole(x) <=> 0 < mulHole_T(x).
+    ! x in Relation_T: Relation(x) <=> 0 < mulRelation_T(x).
+    ∀ h ∈ Hole, p ∈ Pigeon: ∀ n, m ∈ Int: 0 < n < mulHole_T(h) ∧ 0 < m < mulPigeon_T(p) ⇒ mulHole_T(h) * m ≠ mulPigeon_T(p) * n.
+    
+}
+
+procedure main() {
+    logging.getLogger().setLevel(logging.INFO)
+    interp, sol = Theory(T).generate(factor=1.5, timeout_seconds=0)
+    pretty_print(sol)
+    print(duration("Expansion"))
+    print("-------------------")
+    print(Theory(T).expand_lifting(sol))
+    print("-------------------")
+}
+        

@@ -1,0 +1,17 @@
+El := {1, 2}.
+A := {1, 2}.
+B := {1, 2}.
+C := {}.
+maxEl := 3.
+typeConfigObject := {1 -> El__, 2 -> El__}.
+
+0.063 Expansion
+-------------------
+ConfigObject := {}.
+El := {1, 2}.
+A := {1, 2}.
+B := {1, 2}.
+C := {}.
+typeConfigObject := {1 -> El__, 2 -> El__}.
+-------------------
+Elapsed time: 0.08977603912353516 seconds

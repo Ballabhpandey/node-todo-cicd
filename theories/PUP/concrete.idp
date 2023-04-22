@@ -1,0 +1,54 @@
+vocabulary V {
+    type Zone ≜ {Z1, Z2345678, Z2367, Z2378, Z45, Z456, Z6, UnusedZ}
+    type Door ≜ {D01, D12, D78, D34, D56, D67, D36, D26, UnusedD}
+    type Unit
+
+    ZD: Zone ⨯ Door → 𝔹
+
+    z1, z2: Unit → Zone
+    d1, d2: Unit → Door
+    p1, p2: Unit → Unit
+
+    var Z ∈ Zone
+    var D ∈ Door
+    var U ∈ Unit
+}
+
+theory T:V {
+    [Each door has a unit]
+    ∀ D: D≠ UnusedD ⇒ ∃U: d1(U)=D ∨ d2(U)=D.
+
+    [Each zone has a unit]
+    ∀ Z: Z ≠ UnusedZ ⇒ ∃U: z1(U)=Z ∨ z2(U)=Z.
+
+    [If a unit u1 controls a door that contributes to a zone on u2, then u1 is a partner of u2, and vice-versa]
+    ∀ U1, U2, Z, D: (d1(U1) = D ∨ d2(U1) = D) ∧ ZD(Z, D) ∧ (z1(U2)=Z ∨ z2(U2)=Z) ∧ U1≠ U2
+       ⇒ (p1(U1)=U2 ∨ p2(U1)=U2) ∧ (p1(U2)=U1 ∨ p2(U2)=U1).
+}
+
+theory S:V {
+    ZD ≜ {
+Z1 D01
+Z1 D12
+Z2345678 D12
+Z2367 D12
+Z2367 D78
+Z2367 D34
+Z2367 D56
+Z2378 D12
+Z2378 D34
+Z2378 D67
+Z2378 D36
+Z2378 D26
+Z45 D34
+Z45 D56
+Z456 D34
+Z456 D67
+Z456 D36
+Z456 D26
+Z6 D56
+Z6 D67
+Z6 D36
+Z6 D26
+    }.
+}
